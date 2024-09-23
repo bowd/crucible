@@ -1,6 +1,7 @@
 from textual import log
 from textual.widgets import Tree as TreeWidget
-from data.shadow_tree import ShadowNode, ShadowTree, NodeID
+
+from crucible.data.shadow_tree import ShadowNode, ShadowTree
 
 
 class Tree(TreeWidget):
@@ -40,19 +41,22 @@ class Tree(TreeWidget):
             self.add_node(child_node, child)
 
     def action_move_down(self):
-        if self.cursor_node.is_last or self.cursor_node.is_root:
+        assert self.cursor_node is not None
+        if self.cursor_node.is_last or not self.cursor_node.parent:
             return
         node_index = self.cursor_node.parent.children.index(self.cursor_node)
         self.move_to(self.cursor_node.parent.children[node_index + 1])
 
     def action_move_up(self):
-        if self.cursor_node.is_root:
+        assert self.cursor_node is not None
+        if self.cursor_node.parent is None:
             return
         node_index = self.cursor_node.parent.children.index(self.cursor_node)
         if node_index:
             self.move_to(self.cursor_node.parent.children[node_index - 1])
 
     def action_move_right(self):
+        assert self.cursor_node is not None
         if self.cursor_node.children:
             if not self.cursor_node.is_expanded:
                 self.cursor_node.expand()
@@ -61,6 +65,7 @@ class Tree(TreeWidget):
                 self.cursor_node.children[0])
 
     def action_move_left(self):
+        assert self.cursor_node is not None
         if not self.cursor_node.is_root:
             self.move_to(self.cursor_node.parent)
 
@@ -71,6 +76,3 @@ class Tree(TreeWidget):
     def on_tree_node_highlighted(self, evt):
         log("Focus: ", evt.node.data)
         self.shadow_tree.set_focused(evt.node.data)
-
-    def on_tree_node_selected(self, evt):
-        self.screen.node_selected(evt.node.data)

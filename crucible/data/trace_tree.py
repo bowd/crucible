@@ -1,21 +1,25 @@
 from uuid import uuid4
 from textual import log
 from rich.text import Text
-from .shadow_tree import ShadowNode, ShadowTree
-from .suite_tree import TestNode
-from .text_styles import default, light, keyword, ret, event, revert
-from .call_filters import call_method_eq, call_depth_lt, call_depth_eq
+
+from crucible.data.shadow_tree import ShadowNode, ShadowTree, NodeID
+from crucible.data.suite_tree import TestNode
+from crucible.data.text_styles import default, light, keyword, ret, event, revert
+from crucible.data.call_filters import call_method_eq, call_depth_lt, call_depth_eq
 
 
 class TraceTreeNode(ShadowNode):
     def __init__(self, expanded=False):
-        id = str(uuid4())
+        id = NodeID(str(uuid4()))
         super().__init__(id, expanded)
 
     def __repr__(self):
-        if ('__short__' in dir(self)):
+        if self.__short__():
             return str(self.__short__())
         return str(self.__display__())
+
+    def __short__(self) -> Text | str:
+        return f"<missing short representation for {self.__class__.__name__}>"
 
 
 class CallNode(TraceTreeNode):
@@ -107,6 +111,7 @@ class ReturnNode(TraceTreeNode):
         elif ('returned_values' in self.ret):
             output = Text(" ")
             for i, child in enumerate(self.children):
+                assert isinstance(child, TraceTreeNode)
                 output.append(child.__short__())
                 if i < len(self.children) - 1:
                     output.append(", ")
@@ -135,7 +140,10 @@ class BaseValueNode():
     def __init__(self, value):
         self.value = value
 
-    def __short__(self):
+    def __display__(self) -> Text | str:
+        return "<Display not implemented for: " + self.__class__.__name__ + ">"
+
+    def __short__(self) -> Text | str:
         return self.__display__()
 
 
@@ -152,7 +160,7 @@ class AddressNode(BaseValueNode):
             output.append(light(self.value.address))
             return output
         else:
-            return self.value.address
+            return str(self.value.address)
 
     def __short__(self):
         if (self.value.label):
@@ -216,10 +224,7 @@ class StructNode(BaseValueNode):
 
 class ArrayNode(BaseValueNode):
     def __display__(self):
-        return default("[]")
-
-    def __short__(self):
-        return default("[...]")
+        return default(f"[{len(self.value.array)}]")
 
 
 class BoolNode(BaseValueNode):
@@ -228,6 +233,13 @@ class BoolNode(BaseValueNode):
             return default("true")
         else:
             return default("false")
+
+
+class FilteredValueNode(BaseValueNode):
+    def __display__(self):
+        if (self.value.filtered_value.label):
+            return light(f"<{self.value.filtered_value.label}>")
+        return "<filtered-value>"
 
 
 class ValueNode(TraceTreeNode):
@@ -254,6 +266,8 @@ class ValueNode(TraceTreeNode):
                 self.children.append(LabeledArgumentNode(item, i.__str__()))
         elif value.boolean != '':
             self.value = BoolNode(value)
+        elif value.filtered_value:
+            self.value = FilteredValueNode(value)
         else:
             log("==================================")
             log(value)
@@ -328,6 +342,7 @@ class EventNode(TraceTreeNode):
 
 class TraceTree(ShadowTree):
     def __init__(self, output):
+        super().__init__()
         self.output = output
         suite = output.suites[0]
         test = output.suites[0].tests[0]

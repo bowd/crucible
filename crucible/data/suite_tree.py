@@ -30,9 +30,10 @@ class SuiteTreeNode(ShadowNode):
             return Text("󱔕 ", style="yellow") + Text(self.__title__(), style="light")
         elif self.status == NodeStatus.FAIL:
             return Text("❌ "+self.__title__(), style="red")
+        return Text("[InvalidStatus] " + self.__title__())
 
     def __title__(self):
-        return self.__id__
+        return str(self.__id__)
 
     def __suite_tree_children__(self) -> Iterator["SuiteTreeNode"]:
         return filter(is_suite_tree_node, self.children)
@@ -55,7 +56,7 @@ class SuiteTreeNode(ShadowNode):
             return NodeStatus.SKIP
         return NodeStatus.PASS
 
-    def merge_up(self, child):
+    def merge_up(self, child) -> None | ShadowNode:
         pass
 
 
@@ -75,9 +76,9 @@ class SuitePathNode(SuiteTreeNode):
 
     def __title__(self):
         if (self.__id__.startswith("root/")):
-            return self.__id__.replace("root/", "")
+            return str(self.__id__).replace("root/", "")
         else:
-            return self.__id__
+            return str(self.__id__)
 
 
 class TestPathNode(SuiteTreeNode):

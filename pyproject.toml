@@ -13,6 +13,7 @@ textual-autocomplete = "^3.0.0a9"
 textual-dev = "^1.5.1"
 pytest = "^8.3.2"
 pyparsing = "^3.1.4"
+rapidfuzz = "^3.10.0"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,4 +1,5 @@
 from typing import NewType, Callable, Optional
+from rich.text import Text
 
 NodeID = NewType("NodeID", str)
 FilterKey = NewType("FilterKey", str)
@@ -6,10 +7,16 @@ Filter = Callable[["ShadowNode"], bool]
 
 
 class ShadowTree():
-    __focused__: NodeID | None = None
     nodes: dict[NodeID, "ShadowNode"] = {}
-    root: Optional["ShadowNode"] = None
+    root: "ShadowNode"
     filters: dict[FilterKey, Filter] = {}
+    __focused__: NodeID
+
+    def __init__(self):
+        self.filters = {}
+        self.root = ShadowNode(NodeID("root"))
+        self.__focused__ = self.root.id
+        self.add_node(self.root)
 
     def set_root(self, root: "ShadowNode"):
         if (self.root):
@@ -17,7 +24,6 @@ class ShadowTree():
         self.root = root
         self.root.tree = self
         self.__focused__ = self.root.id
-        self.filters = {}
         self.add_node(root)
 
     def remove_node(self, node: "ShadowNode"):
@@ -37,7 +43,9 @@ class ShadowTree():
     @property
     def focused(self):
         focused = self.nodes[self.__focused__]
-        while focused.hidden:
+        if focused is None:
+            raise ValueError("Focused node not found")
+        while focused.hidden and focused.parent:
             focused = focused.parent
         return focused.id
 
@@ -85,9 +93,6 @@ class ShadowNode():
     def toggle_expanded(self, expanded):
         self.expanded = expanded
 
-    def focus(self, focused):
-        self.tree.set_focused(self.path_id)
-
     def add_children_from_node(self, node: "ShadowNode"):
         for child in node.children:
             if self.tree:
@@ -116,7 +121,7 @@ class ShadowNode():
     def label(self):
         return self.__display__()
 
-    def __display__(self):
+    def __display__(self) -> str | Text:
         return "__display__ not implemented for:  " + str(self)
 
     def __repr__(self):

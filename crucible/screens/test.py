@@ -1,14 +1,13 @@
 from textual.screen import Screen
 from textual.widgets import LoadingIndicator, Header, Footer, Static
-from textual.scroll_view import ScrollView
 from textual.reactive import reactive
 
-from data.trace_tree import TraceTree
-from data.shadow_tree import NodeID
-from data.node_filters import isCall
+from crucible.data.trace_tree import TraceTree
+from crucible.data.shadow_tree import NodeID, ShadowTree, FilterKey
+from crucible.data.node_filters import isCall
+from crucible.runner import runner, RunConfig
 
 from .tree import Tree
-from runner import runner, RunConfig
 
 
 class LoadingTest(Static):
@@ -27,9 +26,9 @@ class TestScreen(Screen):
         ("r", "run_test", "Rerun test"),
         ("f", "filters", "Filters")
     ]
-    loading = reactive(False, recompose=True)
+    loading = reactive(True, recompose=True)
     verbose_test = reactive(None, recompose=True)
-    tree: TraceTree = None
+    shadow_tree: ShadowTree = ShadowTree()
     title = reactive(None)
     filters = reactive([], recompose=True)
 
@@ -43,15 +42,14 @@ class TestScreen(Screen):
         self.call_after_refresh(self.action_run_test)
 
     async def action_filters(self) -> None:
-        if len(self.tree.filters) == 0:
-            self.tree.add_filters({
-                'vm::prank': isCall("VM", "prank"),
-                'vm::label': isCall("VM", "label"),
-                'vm::addr': isCall("VM", "addr"),
-                'console::log': isCall("console", "log"),
+        if len(self.shadow_tree.filters) == 0:
+            self.shadow_tree.add_filters({
+                FilterKey('vm::label'): isCall("VM", "label"),
+                FilterKey('vm::addr'): isCall("VM", "addr"),
+                FilterKey('console::log'): isCall("console", "log"),
             })
         else:
-            self.tree.filters = {}
+            self.shadow_tree.filters = {}
         await self.recompose()
         self.call_after_refresh(self.focus_child, "tree")
 
@@ -60,7 +58,7 @@ class TestScreen(Screen):
         if self.loading:
             yield LoadingTest(self.test.test, classes="loading-tests")
         elif self.tree:
-            yield Tree(self.tree, id="tree")
+            yield Tree(self.shadow_tree, id="tree")
             if self.test.logs.strip():
                 yield Static("Logs:\n" + self.test.logs, id="logs")
         yield Footer()
@@ -82,7 +80,7 @@ class TestScreen(Screen):
                                None)
         output = runner.run(run_config)
         self.test = output.suites[0].tests[0]
-        self.tree = TraceTree(output)
+        self.shadow_tree = TraceTree(output)
         self.loading = False
         self.call_after_refresh(self.focus_child, "tree")
 
