@@ -46,6 +46,8 @@ class TestScreen(Screen):
         if len(self.tree.filters) == 0:
             self.tree.add_filters({
                 'vm::prank': isCall("VM", "prank"),
+                'vm::label': isCall("VM", "label"),
+                'vm::addr': isCall("VM", "addr"),
                 'console::log': isCall("console", "log"),
             })
         else:

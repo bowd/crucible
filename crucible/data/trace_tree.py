@@ -4,6 +4,7 @@ from rich.text import Text
 from .shadow_tree import ShadowNode, ShadowTree
 from .suite_tree import TestNode
 from .text_styles import default, light, keyword, ret, event, revert
+from .call_filters import call_method_eq, call_depth_lt, call_depth_eq
 
 
 class TraceTreeNode(ShadowNode):
@@ -21,7 +22,11 @@ class CallNode(TraceTreeNode):
     args: list["LabeledArgumentNode"] = []
 
     def __init__(self, call):
-        super().__init__(call['prefix']['depth'] < 1)
+        super().__init__(
+            call_method_eq(call, "setUp") and
+            call_depth_eq(call, 0) or
+            call_depth_lt(call, 1))
+
         self.call = call
         self.args = []
         if (self.call.function.args):
@@ -33,29 +38,29 @@ class CallNode(TraceTreeNode):
     def __display__(self):
         return self.gas + " " + self.target + default("::") + self.function + self.call_type
 
-    @ property
+    @property
     def gas(self):
         return light(f"[{self.call.gas}]")
 
-    @ property
+    @property
     def call_type(self):
         if self.call.function.call_type:
             return light(f" [{self.call.function.call_type}]")
         else:
             return ''
 
-    @ property
+    @property
     def target(self):
         if self.call.function.target.label:
             return keyword(self.call.function.target.label)
         else:
             return keyword(self.call.function.target.address)
 
-    @ property
+    @property
     def function(self):
         return keyword(f"{self.method}(") + self.arguments + keyword(")")
 
-    @ property
+    @property
     def arguments(self):
         if (self.args):
             output = Text()
@@ -72,7 +77,7 @@ class CallNode(TraceTreeNode):
         else:
             return Text('')
 
-    @ property
+    @property
     def method(self):
         if self.call.function.name:
             return Text(self.call.function.name)
@@ -283,7 +288,7 @@ class LabeledArgumentNode(ValueNode):
 
 class CreateNode(TraceTreeNode):
     def __init__(self, create):
-        super().__init__(True)
+        super().__init__(False)
         self.create = create
 
     def __display__(self):
@@ -293,7 +298,7 @@ class CreateNode(TraceTreeNode):
         output.append(light("@" + self.create.address))
         return self.gas + " " + output
 
-    @ property
+    @property
     def gas(self):
         return light(f"[{self.create.gas}]")
 
@@ -308,7 +313,7 @@ class EventNode(TraceTreeNode):
     def __display__(self):
         return event(f"emit {self.event.name}") + "(" + self.arguments + ")"
 
-    @ property
+    @property
     def arguments(self):
         if (self.event.args):
             output = Text()

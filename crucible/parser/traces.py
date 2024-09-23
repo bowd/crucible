@@ -17,16 +17,20 @@ event = (
 
 
 def parse_prefix(tokens):
+    depth = len(tokens.depth)
+    if tokens.child != '' or tokens.last_child != '':
+        depth += 1
+
     return {
-        "depth": len(tokens.depth),
-        "is_last_child": "last-child" in tokens
+        "depth": depth,
+        "is_last_child": tokens.last_child != ''
     }
 
 
 prefix = pp.Optional(
-    pp.Literal("│")[...]("depth") + (
+    pp.Literal("│")("depth*")[...] + (
         pp.Literal("├─")("child") |
-        pp.Literal("└─")("last-child")
+        pp.Literal("└─")("last_child")
     ))("prefix").set_parse_action(parse_prefix)
 
 target = pp.Group(address | label("label"))
@@ -102,4 +106,3 @@ trace_line = (
     event_parser("event") |
     call_end_parser("end")
 )
-
