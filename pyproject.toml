@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "crucible"
+version = "0.1.0"
+description = "TUI for running interacting with Foundry's Forge Tests."
+authors = ["bogdan <bogdan@bowd.io>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+textual = "^0.77.0"
+textual-autocomplete = "^3.0.0a9"
+textual-dev = "^1.5.1"
+pytest = "^8.3.2"
+pyparsing = "^3.1.4"
+
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.26.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

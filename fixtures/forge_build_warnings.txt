@@ -1,0 +1,64 @@
+Compiling 243 files with Solc 0.8.18
+Compiling 74 files with Solc 0.8.26
+Compiling 64 files with Solc 0.5.17
+Solc 0.5.17 finished in 319.09ms
+Solc 0.8.26 finished in 1.87s
+Solc 0.8.18 finished in 11.64s
+Compiler run successful with warnings:
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/interfaces/IBreakerBox.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/libraries/TradingLimits.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+test/utils/harnesses/ITradingLimitsHarness.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+test/utils/harnesses/TradingLimitsHarness.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/interfaces/IExchangeProvider.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/interfaces/IBiPoolManager.sol:4:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/interfaces/IBroker.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/swap/BiPoolManager.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/swap/Broker.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/swap/ConstantProductPricingModule.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/swap/ConstantSumPricingModule.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+Ran 8 tests for test/integration/protocol/BrokerIntegration.t.sol:BrokerIntegrationTest
+[PASS] test_getExchangeProviders_shouldReturnProviderWithCorrectExchanges() (gas: 108710)
+[PASS] test_swapIn_CELOTocEUR() (gas: 292664)
+[PASS] test_swapIn_CELOTocUSD() (gas: 292684)
+[PASS] test_swapIn_cEURToBridgedUSDC() (gas: 329715)
+[PASS] test_swapIn_cEURTocUSD() (gas: 299059)
+[PASS] test_swapIn_cUSDToBridgedUSDC() (gas: 325413)
+[PASS] test_swapIn_cUSDTocEUR() (gas: 299028)
+[PASS] test_swap_whenBucketTriggerConditionsAreMet_shouldTriggerBucketUpdate() (gas: 1611649)
+Suite result: ok. 8 passed; 0 failed; 0 skipped; finished in 25.18ms (5.99ms CPU time)
+
+Ran 1 test suite in 110.92ms (25.18ms CPU time): 8 tests passed, 0 failed, 0 skipped (8 total tests)

@@ -1,0 +1,12 @@
+Ran 8 tests for test/integration/protocol/BrokerIntegration.t.sol:BrokerIntegrationTest
+[PASS] test_getExchangeProviders_shouldReturnProviderWithCorrectExchanges() (gas: 108710)
+[PASS] test_swapIn_CELOTocEUR() (gas: 292664)
+[PASS] test_swapIn_CELOTocUSD() (gas: 292684)
+[PASS] test_swapIn_cEURToBridgedUSDC() (gas: 329715)
+[PASS] test_swapIn_cEURTocUSD() (gas: 299059)
+[PASS] test_swapIn_cUSDToBridgedUSDC() (gas: 325413)
+[PASS] test_swapIn_cUSDTocEUR() (gas: 299028)
+[PASS] test_swap_whenBucketTriggerConditionsAreMet_shouldTriggerBucketUpdate() (gas: 1611649)
+Suite result: ok. 8 passed; 0 failed; 0 skipped; finished in 25.18ms (5.99ms CPU time)
+
+Ran 1 test suite in 110.92ms (25.18ms CPU time): 8 tests passed, 0 failed, 0 skipped (8 total tests)

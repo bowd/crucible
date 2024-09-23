@@ -1,0 +1,17 @@
+.loading-tests {
+    align: center middle;
+    height: 100%;
+}
+
+.loading-text {
+    align: center middle;
+    text-align: center;
+    height: 1;
+}
+
+.loading-indicator {
+    height: 1;
+}
+
+.test-screen {
+}

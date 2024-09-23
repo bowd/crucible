@@ -1,0 +1,43 @@
+Compiling 224 files with Solc 0.8.18
+Compiling 64 files with Solc 0.5.17
+Compiling 55 files with Solc 0.8.26
+Solc 0.5.17 finished in 303.83ms
+Solc 0.8.26 finished in 1.73s
+Solc 0.8.18 finished in 5.53s
+Compiler run successful with warnings:
+Warning (2018): Function state mutability can be restricted to view
+  --> test/integration/protocol/BrokerIntegration.t.sol:74:3:
+   |
+74 |   function test_getExchangeProviders_shouldReturnProviderWithCorrectExchanges() public {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+ 
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/interfaces/IBreakerBox.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+contracts/libraries/TradingLimits.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+Ran 3 tests for test/unit/swap/BiPoolManager.t.sol:BiPoolManagerTest_ConstantSum
+[PASS] test_quotesAndSwaps_whenMedianNotRecent_shouldRevert() (gas: 201220)
+[PASS] test_quotesAndSwaps_whenNotEnoughReports_shouldRevert() (gas: 258283)
+[PASS] test_quotesAndSwaps_whenOldestReportExpired_shouldRevert() (gas: 275475)
+Suite result: ok. 3 passed; 0 failed; 0 skipped; finished in 2.62ms (601.04µs CPU time)
+
+Ran 11 tests for test/unit/oracles/BreakerBox.t.sol:BreakerBoxTest_checkAndSetBreakers
+[PASS] test_checkAndSetBreakers_whenABreakerIsNotEnabled_shouldNotTrigger() (gas: 148745)
+[PASS] test_checkAndSetBreakers_whenABreakerIsTripped_shouldSetModeAndEmit() (gas: 217702)
+[PASS] test_checkAndSetBreakers_whenCallerIsNotSortedOraclesOrBreakerBox_shouldRevert() (gas: 13254)
+[PASS] test_checkAndSetBreakers_whenCooldownOneSecond_shouldSetStatusCorrectly() (gas: 251264)
+[PASS] test_checkAndSetBreakers_whenCooldownTenSeconds_shouldSetStatusCorrectly() (gas: 251288)
+[PASS] test_checkAndSetBreakers_whenMultipleBreakersAreEnabled_shouldCalculateTradingModeCorrectly() (gas: 367972)
+[PASS] test_checkAndSetBreakers_whenNoBreakersAreTripped_shouldReturnDefaultMode() (gas: 289078)
+[PASS] test_checkAndSetBreakers_whenRateFeedIsNotInDefaultModeAndCanReset_shouldResetMode() (gas: 200719)
+[PASS] test_checkAndSetBreakers_whenRateFeedIsNotInDefaultModeAndCantReset_shouldEmitCriteriaFail() (gas: 219698)
+[PASS] test_checkAndSetBreakers_whenRateFeedIsNotInDefaultModeAndCooldownNotPassed_shouldEmitNotCool() (gas: 216460)
+[PASS] test_checkAndSetBreakers_whenRateFeedIsNotInDefaultModeAndNoBreakerCooldown_shouldReturnCorrectModeAndEmit() (gas: 196287)
+Suite result: ok. 11 passed; 0 failed; 0 skipped; finished in 2.88ms (1.23ms CPU time)
+
+Ran 2 test suites in 1.34s (3.78s CPU time): 14 tests passed, 0 failed, 0 skipped (14 total tests)

@@ -1,0 +1,36 @@
+No files changed, compilation skipped
+
+Ran 1 test for test/unit/oracles/ChainlinkRelayerFactory.t.sol:ChainlinkRelayerFactoryTest_redeployRelayer
+[PASS] test_revertsWhenDeployingTheSameExactRelayer() (gas: 74860)
+Traces:
+  [5813535] ChainlinkRelayerFactoryTest_redeployRelayer::setUp()
+    ├─ [4004296] → new ChainlinkRelayerFactory@0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+    │   └─ ← [Return] 19997 bytes of code
+    ├─ [0] VM::prank(owner: [0x7c8999dC9a822c1f0Df42023113EDB4FDd543266])
+    │   └─ ← [Return] 
+    ├─ [94051] ChainlinkRelayerFactory::initialize(sortedOracles: [0x212787B34911b9B7aE43D57b623c69d1524ac587], relayerDeployer: [0x5e60F966059BD99408b7E89D11Ccb35B69501Eb6])
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: owner: [0x7c8999dC9a822c1f0Df42023113EDB4FDd543266])
+    │   ├─ emit Initialized(version: 1)
+    │   └─ ← [Stop] 
+    ├─ [0] VM::prank(relayerDeployer: [0x5e60F966059BD99408b7E89D11Ccb35B69501Eb6])
+    │   └─ ← [Return] 
+    ├─ [1630543] ChainlinkRelayerFactory::deployRelayer(rateFeed1: [0x83BF10a1284F77A6F8B42D11Bfb663B4282803b7], "CELO/USD", 0, [ChainlinkAggregator({ aggregator: 0x0B0B83ba24fAe5C81de37AC932583c15E9671Acd, invert: false })])
+    │   ├─ [1477937] → new ChainlinkRelayerV1@0xc0de94053fE9103d4693410C106255F3FEE547A5
+    │   │   └─ ← [Return] 7241 bytes of code
+    │   ├─ emit RelayerDeployed(relayerAddress: ChainlinkRelayerV1: [0xc0de94053fE9103d4693410C106255F3FEE547A5], rateFeedId: rateFeed1: [0x83BF10a1284F77A6F8B42D11Bfb663B4282803b7], rateFeedDescription: "CELO/USD", aggregators: [ChainlinkAggregator({ aggregator: 0x0B0B83ba24fAe5C81de37AC932583c15E9671Acd, invert: false })])
+    │   └─ ← [Return] ChainlinkRelayerV1: [0xc0de94053fE9103d4693410C106255F3FEE547A5]
+    └─ ← [Stop] 
+
+  [89260] ChainlinkRelayerFactoryTest_redeployRelayer::test_revertsWhenDeployingTheSameExactRelayer() 
+    ├─ [0] VM::expectRevert(ContractAlreadyExists(0xc0de94053fE9103d4693410C106255F3FEE547A5, 0x83BF10a1284F77A6F8B42D11Bfb663B4282803b7))
+    │   └─ ← [Return] 
+    ├─ [0] VM::prank(relayerDeployer: [0x5e60F966059BD99408b7E89D11Ccb35B69501Eb6])
+    │   └─ ← [Return] 
+    ├─ [64367] ChainlinkRelayerFactory::redeployRelayer(rateFeed1: [0x83BF10a1284F77A6F8B42D11Bfb663B4282803b7], "CELO/USD", 0, [ChainlinkAggregator({ aggregator: 0x0B0B83ba24fAe5C81de37AC932583c15E9671Acd, invert: false })])
+    │   ├─ emit RelayerRemoved(relayerAddress: ChainlinkRelayerV1: [0xc0de94053fE9103d4693410C106255F3FEE547A5], rateFeedId: rateFeed1: [0x83BF10a1284F77A6F8B42D11Bfb663B4282803b7])
+    │   └─ ← [Revert] ContractAlreadyExists(0xc0de94053fE9103d4693410C106255F3FEE547A5, 0x83BF10a1284F77A6F8B42D11Bfb663B4282803b7)
+    └─ ← [Stop] 
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 2.28ms (164.96µs CPU time)
+
+Ran 1 test suite in 953.84ms (2.28ms CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)

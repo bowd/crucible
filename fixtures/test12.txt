@@ -1,0 +1,420 @@
+No files changed, compilation skipped
+
+Ran 1 test for test/integration/governance/GovernanceIntegration.t.sol:GovernanceIntegrationTest
+[PASS] test_airgrab_whenClaimedByUser_shouldBeLocked_canBeUsedInGovernance() (gas: 2343907)
+Traces:
+  [36081974] GovernanceIntegrationTest::setUp()
+    ├─ [0] VM::roll(21871402 [2.187e7])
+    │   └─ ← [Return] 
+    ├─ [0] VM::warp(1697025601 [1.697e9])
+    │   └─ ← [Return] 
+    ├─ [0] VM::label(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], "Claimer0")
+    │   └─ ← [Return] 
+    ├─ [0] VM::label(Claimer1: [0x6B70014D9c0BF1F53695a743Fe17996f132e9482], "Claimer1")
+    │   └─ ← [Return] 
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] FractalSigner: [0x9103988706e3F875D9CD8C9987B329b53079D578]
+    ├─ [0] VM::label(FractalSigner: [0x9103988706e3F875D9CD8C9987B329b53079D578], "FractalSigner")
+    │   └─ ← [Return] 
+    ├─ [4967761] → new GnosisSafe@0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+    │   └─ ← [Return] 24699 bytes of code
+    ├─ [955394] → new GnosisSafeProxyFactory@0x2e234DAe75C793f67A35089C9d99245E1C58470b
+    │   └─ ← [Return] 4772 bytes of code
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] MentoSigner0: [0xD67b21795C9bbe58179312fc5b3036B685fe56b3]
+    ├─ [0] VM::label(MentoSigner0: [0xD67b21795C9bbe58179312fc5b3036B685fe56b3], "MentoSigner0")
+    │   └─ ← [Return] 
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] MentoSigner1: [0xAeD65a86a7Be1079312940eb146884527EC1608E]
+    ├─ [0] VM::label(MentoSigner1: [0xAeD65a86a7Be1079312940eb146884527EC1608E], "MentoSigner1")
+    │   └─ ← [Return] 
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] MentoSigner2: [0x4e5c03DE44652c99B4691711032d28494aB44b3d]
+    ├─ [0] VM::label(MentoSigner2: [0x4e5c03DE44652c99B4691711032d28494aB44b3d], "MentoSigner2")
+    │   └─ ← [Return] 
+    ├─ [253923] GnosisSafeProxyFactory::createProxyWithNonce(GnosisSafe: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], 0xb63e800d000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003000000000000000000000000d67b21795c9bbe58179312fc5b3036b685fe56b3000000000000000000000000aed65a86a7be1079312940eb146884527ec1608e0000000000000000000000004e5c03de44652c99b4691711032d28494ab44b3d0000000000000000000000000000000000000000000000000000000000000000, 14815181914189976181768468844142595593199641909245381605870659978229969847474 [1.481e76])
+    │   ├─ [48236] → new GnosisSafeProxy@0xD67F7A07519746a751326753d09ff1fFEcC89e1c
+    │   │   └─ ← [Return] 128 bytes of code
+    │   ├─ [166532] GnosisSafeProxy::setup([0xD67b21795C9bbe58179312fc5b3036B685fe56b3, 0xAeD65a86a7Be1079312940eb146884527EC1608E, 0x4e5c03DE44652c99B4691711032d28494aB44b3d], 2, 0x0000000000000000000000000000000000000000, 0x, 0x0000000000000000000000000000000000000000, 0x0000000000000000000000000000000000000000, 0, 0x0000000000000000000000000000000000000000)
+    │   │   ├─ [166138] GnosisSafe::setup([0xD67b21795C9bbe58179312fc5b3036B685fe56b3, 0xAeD65a86a7Be1079312940eb146884527EC1608E, 0x4e5c03DE44652c99B4691711032d28494aB44b3d], 2, 0x0000000000000000000000000000000000000000, 0x, 0x0000000000000000000000000000000000000000, 0x0000000000000000000000000000000000000000, 0, 0x0000000000000000000000000000000000000000) [delegatecall]
+    │   │   │   ├─ emit SafeSetup(initiator: GnosisSafeProxyFactory: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], owners: [0xD67b21795C9bbe58179312fc5b3036B685fe56b3, 0xAeD65a86a7Be1079312940eb146884527EC1608E, 0x4e5c03DE44652c99B4691711032d28494aB44b3d], threshold: 2, initializer: 0x0000000000000000000000000000000000000000, fallbackHandler: 0x0000000000000000000000000000000000000000)
+    │   │   │   └─ ← [Stop] 
+    │   │   └─ ← [Return] 
+    │   ├─ emit ProxyCreation(proxy: GnosisSafeProxy: [0xD67F7A07519746a751326753d09ff1fFEcC89e1c], singleton: GnosisSafe: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f])
+    │   └─ ← [Return] GnosisSafeProxy: [0xD67F7A07519746a751326753d09ff1fFEcC89e1c]
+    ├─ [0] VM::prank(owner: [0x7c8999dC9a822c1f0Df42023113EDB4FDd543266])
+    │   └─ ← [Return] 
+    ├─ [2742228] → new GovernanceFactory@0x88F59F8826af5e695B13cA934d6c7999875A9EeA
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: owner: [0x7c8999dC9a822c1f0Df42023113EDB4FDd543266])
+    │   ├─ emit OwnershipTransferred(previousOwner: owner: [0x7c8999dC9a822c1f0Df42023113EDB4FDd543266], newOwner: CeloGovernance: [0xB2a4fE0A0e47B80cE34c60D16174b3cfB5ad6121])
+    │   └─ ← [Return] 13563 bytes of code
+    ├─ [0] VM::prank(CeloGovernance: [0xB2a4fE0A0e47B80cE34c60D16174b3cfB5ad6121])
+    │   └─ ← [Return] 
+    ├─ [26479418] GovernanceFactory::createGovernance(WatchdogMultisig: [0xa322383BE30eDE0683E2858AD857d540fc732553], 0x945d83ced94efc822fed712b4c4694b4e1129607ec5bbd2ab971bb08dca4d809, FractalSigner: [0x9103988706e3F875D9CD8C9987B329b53079D578], MentoTokenAllocationParams({ airgrabAllocation: 50, mentoTreasuryAllocation: 100, additionalAllocationRecipients: [0xD67F7A07519746a751326753d09ff1fFEcC89e1c], additionalAllocationAmounts: [200] }))
+    │   ├─ [703169] ProxyDeployerLib::6df79b05() [delegatecall]
+    │   │   ├─ [669836] → new ChainlinkRelayerFactoryProxyAdmin@0xf801f3A6F4e09F82D6008505C67a0A5b39842406
+    │   │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   └─ ← [Return] 3226 bytes of code
+    │   │   └─ ← [Return] 0x000000000000000000000000f801f3a6f4e09f82d6008505c67a0a5b39842406
+    │   ├─ [2051349] MentoTokenDeployerLib::95e9e07a(00000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000100000000000000000000000000873284c1fc46e782099a5342014fda24d27409c40000000000000000000000005ff909741ae5c2a2e83893e0019023c6861a2f360000000000000000000000000000000000000000000000000000000000000003000000000000000000000000032fe56a4d053f5b0d9e4123debc2d3b812a195800000000000000000000000082c7fea4628d6e13e84624ecba7b95d3d8314a3e000000000000000000000000d67f7a07519746a751326753d09ff1ffecc89e1c00000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000032000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000c8) [delegatecall]
+    │   │   ├─ [2009153] → new MentoToken@0x03701a3db17248c79AA6512CcDC89c45bc1443E2
+    │   │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958], value: 50000000000000000000000000 [5e25])
+    │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E], value: 100000000000000000000000000 [1e26])
+    │   │   │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: GnosisSafeProxy: [0xD67F7A07519746a751326753d09ff1fFEcC89e1c], value: 200000000000000000000000000 [2e26])
+    │   │   │   ├─ emit Paused(account: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   └─ ← [Return] 9148 bytes of code
+    │   │   └─ ← [Return] 0x00000000000000000000000003701a3db17248c79aa6512ccdc89c45bc1443e2
+    │   ├─ [964881] EmissionDeployerLib::deploy() [delegatecall]
+    │   │   ├─ [931046] → new Emission@0x07d8b953e55cE81A796Be4fc614598e10A34101b
+    │   │   │   ├─ emit Initialized(version: 255)
+    │   │   │   └─ ← [Return] 4530 bytes of code
+    │   │   └─ ← [Return] 0x00000000000000000000000007d8b953e55ce81a796be4fc614598e10a34101b
+    │   ├─ [418] MentoToken::emissionSupply() [staticcall]
+    │   │   └─ ← [Return] 650000000000000000000000000 [6.5e26]
+    │   ├─ [1019852] ProxyDeployerLib::78adc0d6(00000000000000000000000007d8b953e55ce81a796be4fc614598e10a34101b000000000000000000000000f801f3a6f4e09f82d6008505c67a0a5b39842406000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000641794bb3c00000000000000000000000003701a3db17248c79aa6512ccdc89c45bc1443e200000000000000000000000082c7fea4628d6e13e84624ecba7b95d3d8314a3e00000000000000000000000000000000000000000219aada9b14535aca00000000000000000000000000000000000000000000000000000000000000) [delegatecall]
+    │   │   ├─ [984357] → new ChainlinkRelayerFactoryProxy@0x873284c1fc46E782099A5342014FDA24D27409C4
+    │   │   │   ├─ emit Upgraded(implementation: Emission: [0x07d8b953e55cE81A796Be4fc614598e10A34101b])
+    │   │   │   ├─ [138383] Emission::initialize(MentoToken: [0x03701a3db17248c79AA6512CcDC89c45bc1443E2], ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E], 650000000000000000000000000 [6.5e26]) [delegatecall]
+    │   │   │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   │   ├─ emit Initialized(version: 1)
+    │   │   │   │   └─ ← [Stop] 
+    │   │   │   ├─ emit AdminChanged(previousAdmin: 0x0000000000000000000000000000000000000000, newAdmin: ChainlinkRelayerFactoryProxyAdmin: [0xf801f3A6F4e09F82D6008505C67a0A5b39842406])
+    │   │   │   └─ ← [Return] 3971 bytes of code
+    │   │   └─ ← [Return] 0x000000000000000000000000873284c1fc46e782099a5342014fda24d27409c4
+    │   ├─ [2385566] AirgrabDeployerLib::73564ab0(945d83ced94efc822fed712b4c4694b4e1129607ec5bbd2ab971bb08dca4d8090000000000000000000000009103988706e3f875d9cd8c9987b329b53079d5780000000000000000000000000000000000000000000000000000000000ed4e00000000000000000000000000000000000000000000000000000000006582d7410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006800000000000000000000000003701a3db17248c79aa6512ccdc89c45bc1443e20000000000000000000000005ff909741ae5c2a2e83893e0019023c6861a2f3600000000000000000000000082c7fea4628d6e13e84624ecba7b95d3d8314a3e) [delegatecall]
+    │   │   ├─ [2346649] → new Airgrab@0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958
+    │   │   │   ├─ [25301] MentoToken::approve(ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   │   ├─ emit Approval(owner: Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958], spender: ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] 11466 bytes of code
+    │   │   └─ ← [Return] 0x000000000000000000000000032fe56a4d053f5b0d9e4123debc2d3b812a1958
+    │   ├─ [5100037] LockingDeployerLib::deploy() [delegatecall]
+    │   │   ├─ [5061409] → new Locking@0x5b6c1a0bF4c29897Fb2A1fCf3A238b742C2F57cB
+    │   │   │   └─ ← [Return] 25277 bytes of code
+    │   │   └─ ← [Return] 0x0000000000000000000000005b6c1a0bf4c29897fb2a1fcf3a238b742c2f57cb
+    │   ├─ [3281] Locking::getWeek() [staticcall]
+    │   │   └─ ← [Return] 180
+    │   ├─ [1000676] ProxyDeployerLib::78adc0d6(0000000000000000000000005b6c1a0bf4c29897fb2a1fcf3a238b742c2f57cb000000000000000000000000f801f3a6f4e09f82d6008505c67a0a5b39842406000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000847ac512bb00000000000000000000000003701a3db17248c79aa6512ccdc89c45bc1443e200000000000000000000000000000000000000000000000000000000000000b30000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000) [delegatecall]
+    │   │   ├─ [965174] → new ChainlinkRelayerFactoryProxy@0x5Ff909741AE5c2A2E83893e0019023c6861a2f36
+    │   │   │   ├─ emit Upgraded(implementation: Locking: [0x5b6c1a0bF4c29897Fb2A1fCf3A238b742C2F57cB])
+    │   │   │   ├─ [119047] Locking::__Locking_init(MentoToken: [0x03701a3db17248c79AA6512CcDC89c45bc1443E2], 179, 0, 1) [delegatecall]
+    │   │   │   │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   │   ├─ emit Initialized(version: 1)
+    │   │   │   │   └─ ← [Stop] 
+    │   │   │   ├─ emit AdminChanged(previousAdmin: 0x0000000000000000000000000000000000000000, newAdmin: ChainlinkRelayerFactoryProxyAdmin: [0xf801f3A6F4e09F82D6008505C67a0A5b39842406])
+    │   │   │   └─ ← [Return] 3971 bytes of code
+    │   │   └─ ← [Return] 0x0000000000000000000000005ff909741ae5c2a2e83893e0019023c6861a2f36
+    │   ├─ [3091526] TimelockControllerDeployerLib::deploy() [delegatecall]
+    │   │   ├─ [3055557] → new TimelockController@0xE8077fA03CB46F4270859DF303bC2a8f4ccDbF82
+    │   │   │   └─ ← [Return] 15261 bytes of code
+    │   │   └─ ← [Return] 0x000000000000000000000000e8077fa03cb46f4270859df303bc2a8f4ccdbf82
+    │   ├─ [1155440] ProxyDeployerLib::78adc0d6(000000000000000000000000e8077fa03cb46f4270859df303bc2a8f4ccdbf82000000000000000000000000f801f3a6f4e09f82d6008505c67a0a5b3984240600000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000124672f70c5000000000000000000000000000000000000000000000000000000000002a30000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a322383be30ede0683e2858ad857d540fc7325530000000000000000000000000000000000000000000000000000000000000001000000000000000000000000cef5f96b9e5ac89b4ff9b2aa6cf8e92c787dd7240000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000) [delegatecall]
+    │   │   ├─ [1119904] → new ChainlinkRelayerFactoryProxy@0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E
+    │   │   │   ├─ emit Upgraded(implementation: TimelockController: [0xE8077fA03CB46F4270859DF303bC2a8f4ccDbF82])
+    │   │   │   ├─ [273012] TimelockController::__MentoTimelockController_init(172800 [1.728e5], [0xcEF5F96B9e5aC89b4Ff9b2AA6Cf8E92c787dD724], [0x0000000000000000000000000000000000000000], 0x0000000000000000000000000000000000000000, WatchdogMultisig: [0xa322383BE30eDE0683E2858AD857d540fc732553]) [delegatecall]
+    │   │   │   │   ├─ emit RoleAdminChanged(role: 0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5, previousAdminRole: 0x0000000000000000000000000000000000000000000000000000000000000000, newAdminRole: 0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5)
+    │   │   │   │   ├─ emit RoleAdminChanged(role: 0xb09aa5aeb3702cfd50b6b62bc4532604938f21248a27a1d5ca736082b6819cc1, previousAdminRole: 0x0000000000000000000000000000000000000000000000000000000000000000, newAdminRole: 0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5)
+    │   │   │   │   ├─ emit RoleAdminChanged(role: 0xd8aa0f3194971a2a116679f7c2090f6939c8d4e01a2a8d7e41d55e5351469e63, previousAdminRole: 0x0000000000000000000000000000000000000000000000000000000000000000, newAdminRole: 0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5)
+    │   │   │   │   ├─ emit RoleAdminChanged(role: 0xfd643c72710c63c0180259aba6b2d05451e3591a24e58b62239378085726f783, previousAdminRole: 0x0000000000000000000000000000000000000000000000000000000000000000, newAdminRole: 0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5)
+    │   │   │   │   ├─ emit RoleGranted(role: 0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5, account: ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E], sender: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   │   ├─ emit RoleGranted(role: 0xb09aa5aeb3702cfd50b6b62bc4532604938f21248a27a1d5ca736082b6819cc1, account: ChainlinkRelayerFactoryProxy: [0xcEF5F96B9e5aC89b4Ff9b2AA6Cf8E92c787dD724], sender: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   │   ├─ emit RoleGranted(role: 0xfd643c72710c63c0180259aba6b2d05451e3591a24e58b62239378085726f783, account: ChainlinkRelayerFactoryProxy: [0xcEF5F96B9e5aC89b4Ff9b2AA6Cf8E92c787dD724], sender: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   │   ├─ emit RoleGranted(role: 0xd8aa0f3194971a2a116679f7c2090f6939c8d4e01a2a8d7e41d55e5351469e63, account: 0x0000000000000000000000000000000000000000, sender: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   │   ├─ emit MinDelayChange(oldDuration: 0, newDuration: 172800 [1.728e5])
+    │   │   │   │   ├─ emit RoleGranted(role: 0xfd643c72710c63c0180259aba6b2d05451e3591a24e58b62239378085726f783, account: WatchdogMultisig: [0xa322383BE30eDE0683E2858AD857d540fc732553], sender: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA])
+    │   │   │   │   ├─ emit Initialized(version: 1)
+    │   │   │   │   └─ ← [Stop] 
+    │   │   │   ├─ emit AdminChanged(previousAdmin: 0x0000000000000000000000000000000000000000, newAdmin: ChainlinkRelayerFactoryProxyAdmin: [0xf801f3A6F4e09F82D6008505C67a0A5b39842406])
+    │   │   │   └─ ← [Return] 3971 bytes of code
+    │   │   └─ ← [Return] 0x00000000000000000000000082c7fea4628d6e13e84624ecba7b95d3d8314a3e
+    │   ├─ [7604548] MentoGovernorDeployerLib::deploy() [delegatecall]
+    │   │   ├─ [7562061] → new MentoGovernor@0x3aCd5Cdbc0Aefc39F224a43C6587D01FF4BFdf65
+    │   │   │   └─ ← [Return] 37761 bytes of code
+    │   │   └─ ← [Return] 0x0000000000000000000000003acd5cdbc0aefc39f224a43c6587d01ff4bfdf65
+    │   ├─ [1124673] ProxyDeployerLib::78adc0d6(0000000000000000000000003acd5cdbc0aefc39f224a43c6587d01ff4bfdf65000000000000000000000000f801f3a6f4e09f82d6008505c67a0a5b39842406000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000c4a29107890000000000000000000000005ff909741ae5c2a2e83893e0019023c6861a2f3600000000000000000000000082c7fea4628d6e13e84624ecba7b95d3d8314a3e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001d88000000000000000000000000000000000000000000000021e19e0c9bab2400000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000) [delegatecall]
+    │   │   ├─ [1089158] → new ChainlinkRelayerFactoryProxy@0xcEF5F96B9e5aC89b4Ff9b2AA6Cf8E92c787dD724
+    │   │   │   ├─ emit Upgraded(implementation: MentoGovernor: [0x3aCd5Cdbc0Aefc39F224a43C6587D01FF4BFdf65])
+    │   │   │   ├─ [242725] MentoGovernor::__MentoGovernor_init(ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E], 0, 120960 [1.209e5], 10000000000000000000000 [1e22], 2) [delegatecall]
+    │   │   │   │   ├─ emit VotingDelaySet(oldVotingDelay: 0, newVotingDelay: 0)
+    │   │   │   │   ├─ emit VotingPeriodSet(oldVotingPeriod: 0, newVotingPeriod: 120960 [1.209e5])
+    │   │   │   │   ├─ emit ProposalThresholdSet(oldProposalThreshold: 0, newProposalThreshold: 10000000000000000000000 [1e22])
+    │   │   │   │   ├─ emit QuorumNumeratorUpdated(oldQuorumNumerator: 0, newQuorumNumerator: 2)
+    │   │   │   │   ├─ emit TimelockChange(oldTimelock: 0x0000000000000000000000000000000000000000, newTimelock: ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   │   │   ├─ emit Initialized(version: 1)
+    │   │   │   │   └─ ← [Stop] 
+    │   │   │   ├─ emit AdminChanged(previousAdmin: 0x0000000000000000000000000000000000000000, newAdmin: ChainlinkRelayerFactoryProxyAdmin: [0xf801f3A6F4e09F82D6008505C67a0A5b39842406])
+    │   │   │   └─ ← [Return] 3971 bytes of code
+    │   │   └─ ← [Return] 0x000000000000000000000000cef5f96b9e5ac89b4ff9b2aa6cf8e92c787dd724
+    │   ├─ [3611] ChainlinkRelayerFactoryProxy::transferOwnership(ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   ├─ [2810] Emission::transferOwnership(ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E]) [delegatecall]
+    │   │   │   ├─ emit OwnershipTransferred(previousOwner: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA], newOwner: ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   │   └─ ← [Stop] 
+    │   │   └─ ← [Return] 
+    │   ├─ [3611] ChainlinkRelayerFactoryProxy::transferOwnership(ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   ├─ [2810] Locking::transferOwnership(ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E]) [delegatecall]
+    │   │   │   ├─ emit OwnershipTransferred(previousOwner: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA], newOwner: ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   │   └─ ← [Stop] 
+    │   │   └─ ← [Return] 
+    │   ├─ [2788] ChainlinkRelayerFactoryProxyAdmin::transferOwnership(ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   ├─ emit OwnershipTransferred(previousOwner: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA], newOwner: ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   └─ ← [Stop] 
+    │   ├─ [2876] MentoToken::transferOwnership(ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   ├─ emit OwnershipTransferred(previousOwner: GovernanceFactory: [0x88F59F8826af5e695B13cA934d6c7999875A9EeA], newOwner: ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E])
+    │   │   └─ ← [Stop] 
+    │   ├─ emit GovernanceCreated(proxyAdmin: ChainlinkRelayerFactoryProxyAdmin: [0xf801f3A6F4e09F82D6008505C67a0A5b39842406], emission: ChainlinkRelayerFactoryProxy: [0x873284c1fc46E782099A5342014FDA24D27409C4], mentoToken: MentoToken: [0x03701a3db17248c79AA6512CcDC89c45bc1443E2], airgrab: Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958], locking: ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], governanceTimelock: ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E], mentoGovernor: ChainlinkRelayerFactoryProxy: [0xcEF5F96B9e5aC89b4Ff9b2AA6Cf8E92c787dD724])
+    │   └─ ← [Stop] 
+    ├─ [715] GovernanceFactory::proxyAdmin() [staticcall]
+    │   └─ ← [Return] ChainlinkRelayerFactoryProxyAdmin: [0xf801f3A6F4e09F82D6008505C67a0A5b39842406]
+    ├─ [803] GovernanceFactory::mentoToken() [staticcall]
+    │   └─ ← [Return] MentoToken: [0x03701a3db17248c79AA6512CcDC89c45bc1443E2]
+    ├─ [715] GovernanceFactory::emission() [staticcall]
+    │   └─ ← [Return] ChainlinkRelayerFactoryProxy: [0x873284c1fc46E782099A5342014FDA24D27409C4]
+    ├─ [737] GovernanceFactory::airgrab() [staticcall]
+    │   └─ ← [Return] Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958]
+    ├─ [825] GovernanceFactory::governanceTimelock() [staticcall]
+    │   └─ ← [Return] ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E]
+    ├─ [737] GovernanceFactory::mentoGovernor() [staticcall]
+    │   └─ ← [Return] ChainlinkRelayerFactoryProxy: [0xcEF5F96B9e5aC89b4Ff9b2AA6Cf8E92c787dD724]
+    ├─ [759] GovernanceFactory::locking() [staticcall]
+    │   └─ ← [Return] ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36]
+    ├─ [0] VM::prank(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6])
+    │   └─ ← [Return] 
+    ├─ [25301] MentoToken::approve(ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   ├─ emit Approval(owner: alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], spender: ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   └─ ← [Return] true
+    ├─ [0] VM::prank(bob: [0x1D96F2f6BeF1202E4Ce1Ff6Dad0c2CB002861d3e])
+    │   └─ ← [Return] 
+    ├─ [25301] MentoToken::approve(ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   ├─ emit Approval(owner: bob: [0x1D96F2f6BeF1202E4Ce1Ff6Dad0c2CB002861d3e], spender: ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   └─ ← [Return] true
+    ├─ [0] VM::prank(charlie: [0xea475d60c118d7058beF4bDd9c32bA51139a74e0])
+    │   └─ ← [Return] 
+    ├─ [25301] MentoToken::approve(ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   ├─ emit Approval(owner: charlie: [0xea475d60c118d7058beF4bDd9c32bA51139a74e0], spender: ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], value: 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    │   └─ ← [Return] true
+    └─ ← [Stop] 
+
+  [2349507] GovernanceIntegrationTest::test_airgrab_whenClaimedByUser_shouldBeLocked_canBeUsedInGovernance()
+    ├─ [0] VM::sign("<pk>", 0xa1dc1a2b6b500e98c68724e83989c82bf33bf7200b10f041b9a817b5e592ed8b) [staticcall]
+    │   └─ ← [Return] 28, 0xd599ef6ab7ed51796ee951e753e967ad05f99ba8250e2b56e80866d4b1f8b880, 0x6efbf69b01b2c9d22080d25d3466df24ffe40a6ca06c5b310ef61a7fef63fafe
+    ├─ [0] VM::sign("<pk>", 0xec232903a0fb2fd9989a18d330e9f8abee18f0ce8179f1bcc01fb4ab619e1f90) [staticcall]
+    │   └─ ← [Return] 28, 0x3c94ffc8cfb72c044ac72eb17aae4a66106674f2163a0aa94790f98206494951, 0x0de45f5774b6cf49aad322e1da3d6cdc95bd784ce207a8491bc961ca3570b3df
+    ├─ [0] VM::prank(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e])
+    │   └─ ← [Return] 
+    ├─ [716445] Airgrab::claim(100000000000000000000 [1e20], Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], [0xf213211627972cf2d02a11f800ed3f60110c1d11d04ec1ea8cb1366611efdaa3], FractalProof({ sig: 0xd599ef6ab7ed51796ee951e753e967ad05f99ba8250e2b56e80866d4b1f8b8806efbf69b01b2c9d22080d25d3466df24ffe40a6ca06c5b310ef61a7fef63fafe1c, validUntil: 1702209601 [1.702e9], approvedAt: 1696161601 [1.696e9], fractalId: "fractalId" }))
+    │   ├─ [3000] PRECOMPILES::ecrecover(0xa1dc1a2b6b500e98c68724e83989c82bf33bf7200b10f041b9a817b5e592ed8b, 28, 96614616743647839633254987125217288263668745276064231309342525264673755412608, 50199593965990582632836530148555774107866863799487520538530757882066680150782) [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000009103988706e3f875d9cd8c9987b329b53079d578
+    │   ├─ [2908] MentoToken::balanceOf(Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958]) [staticcall]
+    │   │   └─ ← [Return] 50000000000000000000000000 [5e25]
+    │   ├─ [645855] ChainlinkRelayerFactoryProxy::lock(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], 100000000000000000000 [1e20], 104, 0)
+    │   │   ├─ [638530] Locking::lock(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], 100000000000000000000 [1e20], 104, 0) [delegatecall]
+    │   │   │   ├─ [33863] MentoToken::transferFrom(Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958], ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], 100000000000000000000 [1e20])
+    │   │   │   │   ├─ emit Transfer(from: Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958], to: ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], value: 100000000000000000000 [1e20])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   ├─ emit LockCreate(id: 1, account: Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], delegate: Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], time: 1, amount: 100000000000000000000 [1e20], slopePeriod: 104, cliff: 0)
+    │   │   │   └─ ← [Return] 1
+    │   │   └─ ← [Return] 1
+    │   ├─ emit TokensClaimed(claimer: Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], amount: 100000000000000000000 [1e20], lockId: 1)
+    │   └─ ← [Stop] 
+    ├─ [0] VM::prank(Claimer1: [0x6B70014D9c0BF1F53695a743Fe17996f132e9482])
+    │   └─ ← [Return] 
+    ├─ [531477] Airgrab::claim(20000000000000000000000 [2e22], alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], [0x0294d3fc355e136dd6fea7f5c2934dd7cb67c2b4607110780e5fbb23d65d7ac4], FractalProof({ sig: 0x3c94ffc8cfb72c044ac72eb17aae4a66106674f2163a0aa94790f982064949510de45f5774b6cf49aad322e1da3d6cdc95bd784ce207a8491bc961ca3570b3df1c, validUntil: 1702209601 [1.702e9], approvedAt: 1696161601 [1.696e9], fractalId: "fractalId" }))
+    │   ├─ [3000] PRECOMPILES::ecrecover(0xec232903a0fb2fd9989a18d330e9f8abee18f0ce8179f1bcc01fb4ab619e1f90, 28, 27402029639765946148176222201389733463165637883233045104144067498126416103761, 6283566186061669211166621883664758534057465059298015035841384493729933472735) [staticcall]
+    │   │   └─ ← [Return] 0x0000000000000000000000009103988706e3f875d9cd8c9987b329b53079d578
+    │   ├─ [908] MentoToken::balanceOf(Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958]) [staticcall]
+    │   │   └─ ← [Return] 49999900000000000000000000 [4.999e25]
+    │   ├─ [469877] ChainlinkRelayerFactoryProxy::lock(Claimer1: [0x6B70014D9c0BF1F53695a743Fe17996f132e9482], alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], 20000000000000000000000 [2e22], 104, 0)
+    │   │   ├─ [469052] Locking::lock(Claimer1: [0x6B70014D9c0BF1F53695a743Fe17996f132e9482], alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], 20000000000000000000000 [2e22], 104, 0) [delegatecall]
+    │   │   │   ├─ [5163] MentoToken::transferFrom(Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958], ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], 20000000000000000000000 [2e22])
+    │   │   │   │   ├─ emit Transfer(from: Airgrab: [0x032fE56a4d053F5B0D9e4123deBC2D3B812A1958], to: ChainlinkRelayerFactoryProxy: [0x5Ff909741AE5c2A2E83893e0019023c6861a2f36], value: 20000000000000000000000 [2e22])
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   ├─ emit LockCreate(id: 2, account: Claimer1: [0x6B70014D9c0BF1F53695a743Fe17996f132e9482], delegate: alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], time: 1, amount: 20000000000000000000000 [2e22], slopePeriod: 104, cliff: 0)
+    │   │   │   └─ ← [Return] 2
+    │   │   └─ ← [Return] 2
+    │   ├─ emit TokensClaimed(claimer: Claimer1: [0x6B70014D9c0BF1F53695a743Fe17996f132e9482], amount: 20000000000000000000000 [2e22], lockId: 2)
+    │   └─ ← [Stop] 
+    ├─ [5687] ChainlinkRelayerFactoryProxy::getVotes(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e]) [staticcall]
+    │   ├─ [4883] Locking::getVotes(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e]) [delegatecall]
+    │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   └─ ← [Return] 100000000000000000000 [1e20]
+    ├─ [0] VM::assertEq(100000000000000000000 [1e20], 100000000000000000000 [1e20]) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [5357] ChainlinkRelayerFactoryProxy::getVotes(Claimer1: [0x6B70014D9c0BF1F53695a743Fe17996f132e9482]) [staticcall]
+    │   ├─ [4553] Locking::getVotes(Claimer1: [0x6B70014D9c0BF1F53695a743Fe17996f132e9482]) [delegatecall]
+    │   │   └─ ← [Return] 0
+    │   └─ ← [Return] 0
+    ├─ [0] VM::assertEq(0, 0) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [5687] ChainlinkRelayerFactoryProxy::getVotes(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6]) [staticcall]
+    │   ├─ [4883] Locking::getVotes(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6]) [delegatecall]
+    │   │   └─ ← [Return] 20000000000000000000000 [2e22]
+    │   └─ ← [Return] 20000000000000000000000 [2e22]
+    ├─ [0] VM::assertEq(20000000000000000000000 [2e22], 20000000000000000000000 [2e22]) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::roll(21888682 [2.188e7])
+    │   └─ ← [Return] 
+    ├─ [0] VM::warp(1697112001 [1.697e9])
+    │   └─ ← [Return] 
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F]
+    ├─ [0] VM::label(NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F], "NewEmissionTarget")
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(Governor: proposer votes below proposal threshold)
+    │   └─ ← [Return] 
+    ├─ [0] VM::prank(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e])
+    │   └─ ← [Return] 
+    ├─ [253501] ChainlinkRelayerFactoryProxy::propose([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], "Change emission target")
+    │   ├─ [246103] MentoGovernor::propose([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], "Change emission target") [delegatecall]
+    │   │   ├─ [3937] ChainlinkRelayerFactoryProxy::getPastVotes(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], 21888681 [2.188e7]) [staticcall]
+    │   │   │   ├─ [3130] Locking::getPastVotes(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], 21888681 [2.188e7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   └─ ← [Revert] revert: Governor: proposer votes below proposal threshold
+    │   └─ ← [Revert] revert: Governor: proposer votes below proposal threshold
+    ├─ [0] VM::prank(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6])
+    │   └─ ← [Return] 
+    ├─ [317256] ChainlinkRelayerFactoryProxy::propose([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], "Change emission target")
+    │   ├─ [309871] MentoGovernor::propose([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], "Change emission target") [delegatecall]
+    │   │   ├─ [3937] ChainlinkRelayerFactoryProxy::getPastVotes(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], 21888681 [2.188e7]) [staticcall]
+    │   │   │   ├─ [3130] Locking::getPastVotes(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], 21888681 [2.188e7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 20000000000000000000000 [2e22]
+    │   │   │   └─ ← [Return] 20000000000000000000000 [2e22]
+    │   │   ├─ emit ProposalCreated(proposalId: 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75], proposer: alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], targets: [0x873284c1fc46E782099A5342014FDA24D27409C4], values: [0], signatures: [""], calldatas: [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], startBlock: 21888682 [2.188e7], endBlock: 22009642 [2.2e7], description: "Change emission target")
+    │   │   └─ ← [Return] 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75]
+    │   └─ ← [Return] 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75]
+    ├─ [0] VM::roll(21888802 [2.188e7])
+    │   └─ ← [Return] 
+    ├─ [0] VM::warp(1697112601 [1.697e9])
+    │   └─ ← [Return] 
+    ├─ [0] VM::prank(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e])
+    │   └─ ← [Return] 
+    ├─ [59762] ChainlinkRelayerFactoryProxy::castVote(9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75], 0)
+    │   ├─ [58955] MentoGovernor::castVote(9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75], 0) [delegatecall]
+    │   │   ├─ [3937] ChainlinkRelayerFactoryProxy::getPastVotes(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], 21888682 [2.188e7]) [staticcall]
+    │   │   │   ├─ [3130] Locking::getPastVotes(Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], 21888682 [2.188e7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   ├─ emit VoteCast(voter: Claimer0: [0x547a9687D36e51DA064eE7C6ac82590E344C4a0e], proposalId: 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75], support: 0, weight: 100000000000000000000 [1e20], reason: "")
+    │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   └─ ← [Return] 100000000000000000000 [1e20]
+    ├─ [0] VM::prank(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6])
+    │   └─ ← [Return] 
+    ├─ [57824] ChainlinkRelayerFactoryProxy::castVote(9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75], 1)
+    │   ├─ [57017] MentoGovernor::castVote(9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75], 1) [delegatecall]
+    │   │   ├─ [3937] ChainlinkRelayerFactoryProxy::getPastVotes(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], 21888682 [2.188e7]) [staticcall]
+    │   │   │   ├─ [3130] Locking::getPastVotes(alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], 21888682 [2.188e7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 20000000000000000000000 [2e22]
+    │   │   │   └─ ← [Return] 20000000000000000000000 [2e22]
+    │   │   ├─ emit VoteCast(voter: alice: [0x328809Bc894f92807417D2dAD6b7C998c1aFdac6], proposalId: 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75], support: 1, weight: 20000000000000000000000 [2e22], reason: "")
+    │   │   └─ ← [Return] 20000000000000000000000 [2e22]
+    │   └─ ← [Return] 20000000000000000000000 [2e22]
+    ├─ [0] VM::expectRevert(Governor: proposal not successful)
+    │   └─ ← [Return] 
+    ├─ [9125] ChainlinkRelayerFactoryProxy::queue([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6)
+    │   ├─ [8239] MentoGovernor::queue([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6) [delegatecall]
+    │   │   └─ ← [Revert] revert: Governor: proposal not successful
+    │   └─ ← [Revert] revert: Governor: proposal not successful
+    ├─ [0] VM::roll(22009762 [2.2e7])
+    │   └─ ← [Return] 
+    ├─ [0] VM::warp(1697717401 [1.697e9])
+    │   └─ ← [Return] 
+    ├─ [106075] ChainlinkRelayerFactoryProxy::queue([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6)
+    │   ├─ [105202] MentoGovernor::queue([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6) [delegatecall]
+    │   │   ├─ [3616] ChainlinkRelayerFactoryProxy::getPastTotalSupply(21888682 [2.188e7]) [staticcall]
+    │   │   │   ├─ [2812] Locking::getPastTotalSupply(21888682 [2.188e7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 20100000000000000000000 [2.01e22]
+    │   │   │   └─ ← [Return] 20100000000000000000000 [2.01e22]
+    │   │   ├─ [9848] ChainlinkRelayerFactoryProxy::getMinDelay() [staticcall]
+    │   │   │   ├─ [2547] TimelockController::getMinDelay() [delegatecall]
+    │   │   │   │   └─ ← [Return] 172800 [1.728e5]
+    │   │   │   └─ ← [Return] 172800 [1.728e5]
+    │   │   ├─ [4926] ChainlinkRelayerFactoryProxy::hashOperationBatch([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0x0000000000000000000000000000000000000000000000000000000000000000, 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6) [staticcall]
+    │   │   │   ├─ [4047] TimelockController::hashOperationBatch([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0x0000000000000000000000000000000000000000000000000000000000000000, 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3
+    │   │   │   └─ ← [Return] 0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3
+    │   │   ├─ [35638] ChainlinkRelayerFactoryProxy::scheduleBatch([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0x0000000000000000000000000000000000000000000000000000000000000000, 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6, 172800 [1.728e5])
+    │   │   │   ├─ [34756] TimelockController::scheduleBatch([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0x0000000000000000000000000000000000000000000000000000000000000000, 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6, 172800 [1.728e5]) [delegatecall]
+    │   │   │   │   ├─ emit CallScheduled(id: 0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3, index: 0, target: ChainlinkRelayerFactoryProxy: [0x873284c1fc46E782099A5342014FDA24D27409C4], value: 0, data: 0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f, predecessor: 0x0000000000000000000000000000000000000000000000000000000000000000, delay: 172800 [1.728e5])
+    │   │   │   │   └─ ← [Stop] 
+    │   │   │   └─ ← [Return] 
+    │   │   ├─ emit ProposalQueued(proposalId: 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75], eta: 1697890201 [1.697e9])
+    │   │   └─ ← [Return] 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75]
+    │   └─ ← [Return] 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75]
+    ├─ [0] VM::expectRevert(TimelockController: operation is not ready)
+    │   └─ ← [Return] 
+    ├─ [54376] ChainlinkRelayerFactoryProxy::execute([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6)
+    │   ├─ [53490] MentoGovernor::execute([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6) [delegatecall]
+    │   │   ├─ [3616] ChainlinkRelayerFactoryProxy::getPastTotalSupply(21888682 [2.188e7]) [staticcall]
+    │   │   │   ├─ [2812] Locking::getPastTotalSupply(21888682 [2.188e7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 20100000000000000000000 [2.01e22]
+    │   │   │   └─ ← [Return] 20100000000000000000000 [2.01e22]
+    │   │   ├─ [1707] ChainlinkRelayerFactoryProxy::isOperationDone(0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3) [staticcall]
+    │   │   │   ├─ [903] TimelockController::isOperationDone(0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3) [delegatecall]
+    │   │   │   │   └─ ← [Return] false
+    │   │   │   └─ ← [Return] false
+    │   │   ├─ [1728] ChainlinkRelayerFactoryProxy::isOperationPending(0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3) [staticcall]
+    │   │   │   ├─ [924] TimelockController::isOperationPending(0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3) [delegatecall]
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ emit ProposalExecuted(proposalId: 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75])
+    │   │   ├─ [7931] ChainlinkRelayerFactoryProxy::executeBatch([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0x0000000000000000000000000000000000000000000000000000000000000000, 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6)
+    │   │   │   ├─ [7039] TimelockController::executeBatch([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0x0000000000000000000000000000000000000000000000000000000000000000, 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6) [delegatecall]
+    │   │   │   │   └─ ← [Revert] revert: TimelockController: operation is not ready
+    │   │   │   └─ ← [Revert] revert: TimelockController: operation is not ready
+    │   │   └─ ← [Revert] revert: TimelockController: operation is not ready
+    │   └─ ← [Revert] revert: TimelockController: operation is not ready
+    ├─ [0] VM::roll(22044322 [2.204e7])
+    │   └─ ← [Return] 
+    ├─ [0] VM::warp(1697890201 [1.697e9])
+    │   └─ ← [Return] 
+    ├─ [9861] ChainlinkRelayerFactoryProxy::emissionTarget() [staticcall]
+    │   ├─ [2560] Emission::emissionTarget() [delegatecall]
+    │   │   └─ ← [Return] ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E]
+    │   └─ ← [Return] ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E]
+    ├─ [0] VM::assertEq(ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E], ChainlinkRelayerFactoryProxy: [0x82c7fea4628d6e13e84624Ecba7b95d3d8314A3E]) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::addr(<pk>) [staticcall]
+    │   └─ ← [Return] Random: [0x96f999A899DAD8bb946976602a993d7b840073Bb]
+    ├─ [0] VM::label(Random: [0x96f999A899DAD8bb946976602a993d7b840073Bb], "Random")
+    │   └─ ← [Return] 
+    ├─ [0] VM::prank(Random: [0x96f999A899DAD8bb946976602a993d7b840073Bb])
+    │   └─ ← [Return] 
+    ├─ [70620] ChainlinkRelayerFactoryProxy::execute([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6)
+    │   ├─ [69747] MentoGovernor::execute([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6) [delegatecall]
+    │   │   ├─ [3616] ChainlinkRelayerFactoryProxy::getPastTotalSupply(21888682 [2.188e7]) [staticcall]
+    │   │   │   ├─ [2812] Locking::getPastTotalSupply(21888682 [2.188e7]) [delegatecall]
+    │   │   │   │   └─ ← [Return] 20100000000000000000000 [2.01e22]
+    │   │   │   └─ ← [Return] 20100000000000000000000 [2.01e22]
+    │   │   ├─ [1707] ChainlinkRelayerFactoryProxy::isOperationDone(0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3) [staticcall]
+    │   │   │   ├─ [903] TimelockController::isOperationDone(0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3) [delegatecall]
+    │   │   │   │   └─ ← [Return] false
+    │   │   │   └─ ← [Return] false
+    │   │   ├─ [1728] ChainlinkRelayerFactoryProxy::isOperationPending(0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3) [staticcall]
+    │   │   │   ├─ [924] TimelockController::isOperationPending(0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3) [delegatecall]
+    │   │   │   │   └─ ← [Return] true
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ emit ProposalExecuted(proposalId: 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75])
+    │   │   ├─ [21250] ChainlinkRelayerFactoryProxy::executeBatch([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0x0000000000000000000000000000000000000000000000000000000000000000, 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6)
+    │   │   │   ├─ [20374] TimelockController::executeBatch([0x873284c1fc46E782099A5342014FDA24D27409C4], [0], [0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f], 0x0000000000000000000000000000000000000000000000000000000000000000, 0xaabbcff3391fd3851ffb74b6b989f715cb59846dbab152713284c899557822e6) [delegatecall]
+    │   │   │   │   ├─ [7872] ChainlinkRelayerFactoryProxy::setEmissionTarget(NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F])
+    │   │   │   │   │   ├─ [7071] Emission::setEmissionTarget(NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F]) [delegatecall]
+    │   │   │   │   │   │   ├─ emit EmissionTargetSet(newTargetAddress: NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F])
+    │   │   │   │   │   │   └─ ← [Stop] 
+    │   │   │   │   │   └─ ← [Return] 
+    │   │   │   │   ├─ emit CallExecuted(id: 0xcf8c5fb84db8b8b185fd558cee41d26c466cabf98b130696aea4aeb5582334f3, index: 0, target: ChainlinkRelayerFactoryProxy: [0x873284c1fc46E782099A5342014FDA24D27409C4], value: 0, data: 0x7cfd0f990000000000000000000000002b65ee39398eddb5daa958fab2faabcb957cc09f)
+    │   │   │   │   └─ ← [Stop] 
+    │   │   │   └─ ← [Return] 
+    │   │   └─ ← [Return] 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75]
+    │   └─ ← [Return] 9018624080445752935189998464209718883495070121585457563465256713498744368248 [9.018e75]
+    ├─ [1361] ChainlinkRelayerFactoryProxy::emissionTarget() [staticcall]
+    │   ├─ [560] Emission::emissionTarget() [delegatecall]
+    │   │   └─ ← [Return] NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F]
+    │   └─ ← [Return] NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F]
+    ├─ [0] VM::assertEq(NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F], NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F]) [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 5.16ms (1.55ms CPU time)
+
+Ran 1 test suite in 1.21s (5.16ms CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)

@@ -1,0 +1,123 @@
+Ran 1 test for test/integration/protocol/BrokerIntegration.t.sol:BrokerIntegrationTest
+[PASS] test_swapIn_cEURToBridgedUSDC() (gas: 329715)
+Logs:
+  changePrank is deprecated. Please use vm.startPrank instead.
+
+Traces:
+  [369515] BrokerIntegrationTest::test_swapIn_cEURToBridgedUSDC()
+    ├─ [2930] cEUR::balanceOf(trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d]) [staticcall]
+    │   └─ ← [Return] 10000000000000000000000 [1e22]
+    ├─ [2908] USDC::balanceOf(trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [2908] USDC::balanceOf(Reserve: [0xA4AD4f68d0b91CFD19687c881e50f3A00242828c]) [staticcall]
+    │   └─ ← [Return] 1000000000000 [1e12]
+    ├─ [2563] cEUR::totalSupply() [staticcall]
+    │   └─ ← [Return] 10000000000000000000000 [1e22]
+    ├─ [5547] Broker::getExchangeProviders() [staticcall]
+    │   └─ ← [Return] [0xD16d567549A2a2a2005aEACf7fB193851603dd70]
+    ├─ [0] VM::assertEq(1, 1) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [84774] Broker::getAmountOut(BiPoolManager: [0xD16d567549A2a2a2005aEACf7fB193851603dd70], 0xf283ef54a9d15c04232137bf8b862218601f06098cb5a42b5f46650c1682b0d3, cEUR: [0xa0Cb889707d426A7A386870A03bc70d1b0697598], USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a], 1000000000000000000000 [1e21]) [staticcall]
+    │   ├─ [77342] BiPoolManager::getAmountOut(0xf283ef54a9d15c04232137bf8b862218601f06098cb5a42b5f46650c1682b0d3, cEUR: [0xa0Cb889707d426A7A386870A03bc70d1b0697598], USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a], 1000000000000000000000 [1e21]) [staticcall]
+    │   │   ├─ [14036] SortedOracles::isOldestReportExpired(0x0Bf8cEcE76B52D089b467dcB76C47A9D006C7935) [staticcall]
+    │   │   │   ├─ [2603] AddressSortedLinkedListWithMedian::d938ec7b(f0b5e257e6413ebef8ecc66803bcd8716a26024199ba7aecec4a17ff65a6249e) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0x000000000000000000000000d7f783a061b2d8813fd97d22448c6aa3daf08326
+    │   │   │   ├─ [2681] AddressSortedLinkedListWithMedian::7c6bb862(f0b5e257e6413ebef8ecc66803bcd8716a26024199ba7aecec4a17ff65a6249e000000000000000000000000d7f783a061b2d8813fd97d22448c6aa3daf08326) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000000d2f00
+    │   │   │   └─ ← [Return] false, 0xd7f783A061b2D8813Fd97d22448c6aA3Daf08326
+    │   │   ├─ [3412] SortedOracles::numRates(0x0Bf8cEcE76B52D089b467dcB76C47A9D006C7935) [staticcall]
+    │   │   │   ├─ [2468] AddressSortedLinkedListWithMedian::6eafa6c3(2f017ef34a091f500e7c517287bf6d33e7355da5a1a6e07d21522343d1c352db) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0x000000000000000000000000000000000000000000000000000000000000000a
+    │   │   │   └─ ← [Return] 10
+    │   │   ├─ [5656] SortedOracles::medianTimestamp(0x0Bf8cEcE76B52D089b467dcB76C47A9D006C7935) [staticcall]
+    │   │   │   ├─ [4732] AddressSortedLinkedListWithMedian::59d556a8(f0b5e257e6413ebef8ecc66803bcd8716a26024199ba7aecec4a17ff65a6249e) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000000d2f00
+    │   │   │   └─ ← [Return] 864000 [8.64e5]
+    │   │   ├─ [741] ConstantSumPricingModule::name() [staticcall]
+    │   │   │   └─ ← [Return] "ConstantSum"
+    │   │   ├─ [8008] ConstantSumPricingModule::getAmountOut(1000000000000000000000000 [1e24], 1111111111111111111111111 [1.111e24], 50000000000000000000000 [5e22], 1000000000000000000000 [1e21]) [staticcall]
+    │   │   │   └─ ← [Return] 1055555555555555555555 [1.055e21]
+    │   │   └─ ← [Return] 1055555555 [1.055e9]
+    │   └─ ← [Return] 1055555555 [1.055e9]
+    ├─ [0] console::log("changePrank is deprecated. Please use vm.startPrank instead.") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return] 
+    ├─ [0] VM::startPrank(trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d])
+    │   └─ ← [Return] 
+    ├─ [25350] cEUR::approve(Broker: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], 1000000000000000000000 [1e21])
+    │   ├─ emit Approval(owner: trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], spender: Broker: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], value: 1000000000000000000000 [1e21])
+    │   └─ ← [Return] true
+    ├─ [195344] Broker::swapIn(BiPoolManager: [0xD16d567549A2a2a2005aEACf7fB193851603dd70], 0xf283ef54a9d15c04232137bf8b862218601f06098cb5a42b5f46650c1682b0d3, cEUR: [0xa0Cb889707d426A7A386870A03bc70d1b0697598], USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a], 1000000000000000000000 [1e21], 0)
+    │   ├─ [50761] BiPoolManager::swapIn(0xf283ef54a9d15c04232137bf8b862218601f06098cb5a42b5f46650c1682b0d3, cEUR: [0xa0Cb889707d426A7A386870A03bc70d1b0697598], USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a], 1000000000000000000000 [1e21])
+    │   │   ├─ [11982] BreakerBox::getRateFeedTradingMode(0x0Bf8cEcE76B52D089b467dcB76C47A9D006C7935) [staticcall]
+    │   │   │   └─ ← [Return] 0
+    │   │   ├─ [3536] SortedOracles::isOldestReportExpired(0x0Bf8cEcE76B52D089b467dcB76C47A9D006C7935) [staticcall]
+    │   │   │   ├─ [603] AddressSortedLinkedListWithMedian::d938ec7b(f0b5e257e6413ebef8ecc66803bcd8716a26024199ba7aecec4a17ff65a6249e) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0x000000000000000000000000d7f783a061b2d8813fd97d22448c6aa3daf08326
+    │   │   │   ├─ [681] AddressSortedLinkedListWithMedian::7c6bb862(f0b5e257e6413ebef8ecc66803bcd8716a26024199ba7aecec4a17ff65a6249e000000000000000000000000d7f783a061b2d8813fd97d22448c6aa3daf08326) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000000d2f00
+    │   │   │   └─ ← [Return] false, 0xd7f783A061b2D8813Fd97d22448c6aA3Daf08326
+    │   │   ├─ [1412] SortedOracles::numRates(0x0Bf8cEcE76B52D089b467dcB76C47A9D006C7935) [staticcall]
+    │   │   │   ├─ [468] AddressSortedLinkedListWithMedian::6eafa6c3(2f017ef34a091f500e7c517287bf6d33e7355da5a1a6e07d21522343d1c352db) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0x000000000000000000000000000000000000000000000000000000000000000a
+    │   │   │   └─ ← [Return] 10
+    │   │   ├─ [1656] SortedOracles::medianTimestamp(0x0Bf8cEcE76B52D089b467dcB76C47A9D006C7935) [staticcall]
+    │   │   │   ├─ [732] AddressSortedLinkedListWithMedian::59d556a8(f0b5e257e6413ebef8ecc66803bcd8716a26024199ba7aecec4a17ff65a6249e) [delegatecall]
+    │   │   │   │   └─ ← [Return] 0x00000000000000000000000000000000000000000000000000000000000d2f00
+    │   │   │   └─ ← [Return] 864000 [8.64e5]
+    │   │   ├─ [741] ConstantSumPricingModule::name() [staticcall]
+    │   │   │   └─ ← [Return] "ConstantSum"
+    │   │   ├─ [8008] ConstantSumPricingModule::getAmountOut(1000000000000000000000000 [1e24], 1111111111111111111111111 [1.111e24], 50000000000000000000000 [5e22], 1000000000000000000000 [1e21]) [staticcall]
+    │   │   │   └─ ← [Return] 1055555555555555555555 [1.055e21]
+    │   │   ├─ [741] ConstantSumPricingModule::name() [staticcall]
+    │   │   │   └─ ← [Return] "ConstantSum"
+    │   │   └─ ← [Return] 1055555555 [1.055e9]
+    │   ├─ [432] USDC::decimals() [staticcall]
+    │   │   └─ ← [Return] 6
+    │   ├─ [2657] Reserve::isStableAsset(cEUR: [0xa0Cb889707d426A7A386870A03bc70d1b0697598]) [staticcall]
+    │   │   └─ ← [Return] true
+    │   ├─ [31636] cEUR::transferFrom(trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], Broker: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], 1000000000000000000000 [1e21])
+    │   │   ├─ emit Approval(owner: trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], spender: Broker: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], value: 0)
+    │   │   ├─ emit Transfer(from: trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], to: Broker: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], value: 1000000000000000000000 [1e21])
+    │   │   └─ ← [Return] true
+    │   ├─ [8526] cEUR::burn(1000000000000000000000 [1e21])
+    │   │   ├─ emit Transfer(from: Broker: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: 0x0000000000000000000000000000000000000000, value: 1000000000000000000000 [1e21])
+    │   │   └─ ← [Return] 0x0000000000000000000000000000000000000000000000000000000000000001
+    │   ├─ [2657] Reserve::isStableAsset(USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a]) [staticcall]
+    │   │   └─ ← [Return] false
+    │   ├─ [2640] Reserve::isCollateralAsset(USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a]) [staticcall]
+    │   │   └─ ← [Return] true
+    │   ├─ [36747] Reserve::transferExchangeCollateralAsset(USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a], trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], 1055555555 [1.055e9])
+    │   │   ├─ [908] USDC::balanceOf(Reserve: [0xA4AD4f68d0b91CFD19687c881e50f3A00242828c]) [staticcall]
+    │   │   │   └─ ← [Return] 1000000000000 [1e12]
+    │   │   ├─ [26545] USDC::transfer(trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], 1055555555 [1.055e9])
+    │   │   │   ├─ emit Transfer(from: Reserve: [0xA4AD4f68d0b91CFD19687c881e50f3A00242828c], to: trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], value: 1055555555 [1.055e9])
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ emit ReserveCollateralAssetsTransferred(spender: Broker: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], value: 1055555555 [1.055e9], token: USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a])
+    │   │   └─ ← [Return] true
+    │   ├─ emit Swap(exchangeProvider: BiPoolManager: [0xD16d567549A2a2a2005aEACf7fB193851603dd70], exchangeId: 0xf283ef54a9d15c04232137bf8b862218601f06098cb5a42b5f46650c1682b0d3, trader: trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], tokenIn: cEUR: [0xa0Cb889707d426A7A386870A03bc70d1b0697598], tokenOut: USDC: [0xF62849F9A0B5Bf2913b396098F7c7019b51A820a], amountIn: 1000000000000000000000 [1e21], amountOut: 1055555555 [1.055e9])
+    │   └─ ← [Return] 1055555555 [1.055e9]
+    ├─ [930] cEUR::balanceOf(trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d]) [staticcall]
+    │   └─ ← [Return] 9000000000000000000000 [9e21]
+    ├─ [908] USDC::balanceOf(trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d]) [staticcall]
+    │   └─ ← [Return] 1055555555 [1.055e9]
+    ├─ [908] USDC::balanceOf(Reserve: [0xA4AD4f68d0b91CFD19687c881e50f3A00242828c]) [staticcall]
+    │   └─ ← [Return] 998944444445 [9.989e11]
+    ├─ [563] cEUR::totalSupply() [staticcall]
+    │   └─ ← [Return] 9000000000000000000000 [9e21]
+    ├─ [0] VM::assertEq(1055555555 [1.055e9], 1055555555 [1.055e9]) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::assertEq(1000000000000000000000 [1e21], 1000000000000000000000 [1e21]) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::assertEq(1055555555 [1.055e9], 1055555555 [1.055e9]) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::assertEq(998944444445 [9.989e11], 998944444445 [9.989e11]) [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::assertEq(9000000000000000000000 [9e21], 9000000000000000000000 [9e21]) [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 22.42ms (518.29µs CPU time)
+
+Ran 1 test suite in 655.84ms (22.42ms CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)
