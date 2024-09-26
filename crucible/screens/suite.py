@@ -53,6 +53,7 @@ class SuiteScreen(Screen):
             return
         node = self.shadow_tree.get_node(evt.node.data)
         if isinstance(node, TestNode):
+            log(node.test)
             if node.test.test == "setUp":
                 self.app.push_screen(TestScreen(node.parent))
             else:

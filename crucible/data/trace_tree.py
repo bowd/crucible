@@ -260,7 +260,7 @@ class ValueNode(TraceTreeNode):
             for member in value.members:
                 self.children.append(
                     LabeledArgumentNode(member.value, member.key))
-        elif value.array:
+        elif value.get_name() == "array":
             self.value = ArrayNode(value)
             for i, item in enumerate(value.array):
                 self.children.append(LabeledArgumentNode(item, i.__str__()))
@@ -269,11 +269,6 @@ class ValueNode(TraceTreeNode):
         elif value.filtered_value:
             self.value = FilteredValueNode(value)
         else:
-            log("==================================")
-            log(value)
-            log(value.get_name())
-            log(dir(value))
-            log("==================================")
             self.value = RawNode(value)
 
     def __short__(self):

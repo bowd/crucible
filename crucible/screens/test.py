@@ -24,17 +24,16 @@ class TestScreen(Screen):
     shadow_tree = reactive(None, recompose=True)
     title = reactive(None)
     filters = reactive([], recompose=True)
+    logs = None
 
     def __init__(self, node, **kwargs):
         super().__init__(classes="test-screen", **kwargs)
         self.node = node
         if isinstance(node, TestNode):
-            self.suite = node.suite
-            self.title = f"{self.suite.contract.split(
-                ":")[-1]}::{self.suite.tests[0].test}"
+            self.title = f"{node.suite.contract.split(
+                ":")[-1]}::{node.test.test}"
         elif isinstance(node, SuiteNode):
-            self.suite = node.suite
-            self.title = f"{self.suite.contract.split(":")[-1]}"
+            self.title = f"{node.suite.contract.split(":")[-1]}"
 
     def on_mount(self) -> None:
         self.action_run_test()
@@ -57,8 +56,8 @@ class TestScreen(Screen):
         yield Header(show_clock=True)
         if self.shadow_tree:
             yield Tree(self.shadow_tree, id="tree")
-            # if self.test.logs.strip():
-            #     yield Static("Logs:\n" + self.test.logs, id="logs")
+            if self.logs and self.logs.strip():
+                yield Static("Logs:\n" + self.logs, id="logs")
         yield Footer()
 
     def action_back(self) -> None:
@@ -70,20 +69,20 @@ class TestScreen(Screen):
         output = await self.app.push_screen_wait(
             RunForgeTest(run_config, title=self.title or "")
         )
-        self.suite = output.suites[0]
         self.shadow_tree = TraceTree(output)
+        self.logs = output.suites[0].tests[0].logs
         self.call_after_refresh(self.focus_child, "tree")
 
     def get_run_config(self) -> RunConfig:
         if isinstance(self.node, TestNode):
             return RunConfig("default",
-                             self.suite.contract.split(':')[-1],
-                             self.suite.tests[0].test,
+                             self.node.suite.contract.split(':')[-1],
+                             self.node.test.test,
                              None,
                              True)
         elif isinstance(self.node, SuiteNode):
             return RunConfig("default",
-                             self.suite.contract.split(':')[-1],
+                             self.node.suite.contract.split(':')[-1],
                              None,
                              None,
                              True)
