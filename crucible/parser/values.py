@@ -5,7 +5,7 @@ LPAR, RPAR, LBRACK, RBRACK, COLON, COMMA = map(pp.Suppress, "()[]:,")
 
 label = pp.Word(
     ppu.BasicMultilingualPlane.alphas + "_",
-    ppu.BasicMultilingualPlane.alphanums + "_" + "₮" + "."
+    ppu.BasicMultilingualPlane.alphanums + "_" + "-" + "₮" + "." + " "
 )
 
 
@@ -30,7 +30,7 @@ _bytes = pp.Combine(Ox + pp.Word(pp.hexnums))("bytes")
 _bytes_empty = Ox("bytes_empty")
 
 # hex = bytes4 | bytes8 | bytes16 | address | bytes32 | _bytes
-hex = (bytes32 | address | bytes16 | bytes8 | bytes4 | _bytes_empty) ^ _bytes
+hex = (bytes32 | address | bytes16 | bytes8 | bytes4 | _bytes_empty) ^ (_bytes)
 
 string = pp.QuotedString('"')("string")
 

@@ -28,7 +28,7 @@ def parse_prefix(tokens):
 
 
 prefix = pp.Optional(
-    pp.Literal("│")("depth*")[...] + (
+    pp.Literal("│")("depth*")[...] + pp.Optional(
         pp.Literal("├─")("child") |
         pp.Literal("└─")("last_child")
     ))("prefix").set_parse_action(parse_prefix)
@@ -64,6 +64,15 @@ trace_parser = prefix + gas + (
 
 event_parser = pp.Optional(prefix("prefix")) + event
 
+raw_event_parser = (
+    prefix("prefix") + pp.Literal("emit topic 0:") + pp.Group(value)("topic0") +
+    pp.Optional(NL + prefix + pp.Literal("topic 1:") + pp.Group(value)("topic1")) +
+    pp.Optional(NL + prefix + pp.Literal("topic 2:") + pp.Group(value)("topic2")) +
+    pp.Optional(NL + prefix + pp.Literal("topic 3:") + pp.Group(value)("topic3")) +
+    pp.Optional(NL + prefix + pp.Literal("data:") + pp.Group(value)("data"))
+)
+
+
 return_value = (
     pp.Group(
         pp.Word(pp.nums)("count") +
@@ -93,7 +102,7 @@ contract_create_parser = (
     prefix +
     gas +
     pp.Suppress("→ new") +
-    label("contract_name") +
+    pp.SkipTo("@")("contract_name") +
     pp.Suppress("@") +
     address("address"))
 
@@ -104,5 +113,6 @@ trace_line = (
     trace_parser("call") |
     contract_create_parser("create") |
     event_parser("event") |
+    raw_event_parser("raw_event") |
     call_end_parser("end")
 )

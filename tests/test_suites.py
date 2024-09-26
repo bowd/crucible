@@ -18,6 +18,15 @@ def test_test_result():
     assert result.result == "PASS"
 
 
+def test_test_failed0():
+    fixture = "[FAIL: setup failed: vm.createSelectFork: Could not instantiate forked environment with fork url: YOUR_MAINNET_RPC_URL] setUp() (gas: 0)"
+    result = test_result.parse_string(fixture)
+    assert result.result == "FAIL"
+    assert result.reason == "setup failed: vm.createSelectFork: Could not instantiate forked environment with fork url: YOUR_MAINNET_RPC_URL"
+    assert result.test == "setUp"
+    assert result.gas == 0
+
+
 def test_test_failed():
     fixture = "[FAIL. Reason: assertion failed: 0x9bC6bc8F96DBa9Ec1c97D9AE3519586c48407Eb1 != 0x0000000000000000000000000000000000000000] test_emitsRelayerDeployedEvent() (gas: 94724)"
     result = test_result.parse_string(fixture)
@@ -69,7 +78,8 @@ def test_suites_trace(suites_trace):
     assert result.suites[0].count == 1
     assert result.suites[0].tests[0].result == "PASS"
     assert result.suites[0].tests[0].gas == 329715
-    assert len(result.suites[0].tests[0].setup_traces) == 113
+    assert len(result.suites[0].tests[0].trace_groups) == 1
+    assert len(result.suites[0].tests[0].trace_groups[0].traces) == 113
 
 
 def test_failing_traces(failing_traces):

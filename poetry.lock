@@ -763,6 +763,16 @@ files = [
 diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
+name = "pyperclip"
+version = "1.9.0"
+description = "A cross-platform clipboard module for Python. (Only handles plain text for now.)"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyperclip-1.9.0.tar.gz", hash = "sha256:b7de0142ddc81bfc5c7507eea19da920b92252b548b96186caf94a5e2527d310"},
+]
+
+[[package]]
 name = "pytest"
 version = "8.3.2"
 description = "pytest: simple powerful testing with Python"
@@ -1139,4 +1149,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "2bf74859bb7cf0810aa29234dbea1491968e38f0515ef3b75e922388f57f736c"
+content-hash = "14dac5b4033cdd894178c57dbe63cf8babd4d94bee04bc27e449150d9e41e026"

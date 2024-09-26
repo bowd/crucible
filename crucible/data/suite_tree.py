@@ -67,11 +67,14 @@ class SuitePathNode(SuiteTreeNode):
     def merge_up(self, child):
         merged_node = None
         if isinstance(child, SuitePathNode):
-            merged_node = SuitePathNode(f"{self.__id__}/{child.__id__}")
+            merged_node = SuitePathNode(f"{self.__id__}_{child.__id__}")
             merged_node.tree = self.tree
             merged_node.add_children_from_node(child)
         elif isinstance(child, SuiteNode):
-            return child
+            merged_node = SuiteNode(
+                f"{self.__id__}_{child.__id__}", child.suite)
+            merged_node.tree = self.tree
+            merged_node.add_children_from_node(child)
         return merged_node
 
     def __title__(self):
@@ -164,14 +167,14 @@ class SuiteTree(ShadowTree):
 
     def __add_test__(self, test, suite, suite_node):
         path = re.split(r"[:/_]", test.test)
-        if len(path) > 1:
+        if path[0] == "test" or path[0] == "testFuzz" or path[0] == "invariant":
             path = path[1:]
         test_label = path.pop()
         current_node = suite_node
         for segment in path:
             found_child = False
             for child in current_node.children:
-                if child.__id__ == segment:
+                if child.__id__ == segment and not isinstance(child, TestNode):
                     current_node = child
                     found_child = True
                     break
@@ -182,6 +185,7 @@ class SuiteTree(ShadowTree):
 
     def __add_suite__(self, suite):
         path = re.split(r"[:/_]", suite.contract)
+        path = list(filter(lambda x: not x.endswith(".sol"), path))
         suite_label = path.pop()
         current_node = self.root
         for segment in path:

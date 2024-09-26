@@ -15,10 +15,8 @@ test_status = (
     pp.Literal("SKIP")("result") |
     (
         pp.Literal("FAIL")("result") +
-        pp.Optional(
-            pp.Literal(". Reason: ") +
-            pp.SkipTo(RBRACK)("reason")
-        )
+        (pp.Literal(". Reason: ") | pp.Literal(": ")) +
+        pp.SkipTo(RBRACK)("reason")
     )
 )
 
@@ -30,11 +28,19 @@ test_result = (
 )
 
 fuzz_test_result = (
-    LBRACK + pp.Word(pp.alphas)("result") + RBRACK +
-    pp.Word(pp.alphanums + "_")("test") + LPAR + pp.Word(pp.alphanums + ",")("args") + RPAR +
+    LBRACK + test_status + RBRACK +
+    pp.Word(pp.alphanums + "_")("test") + LPAR + pp.SkipTo(RPAR + LPAR + pp.Literal("runs:"))("args") + RPAR +
     LPAR + pp.Literal("runs:") + pp.common.number("runs") + COMMA +
     pp.Literal("μ:") + pp.common.number("miu") + COMMA +
     pp.Literal("~:") + pp.common.number("average") + RPAR
+)
+
+invariant_test_result = (
+    LBRACK + test_status + RBRACK +
+    pp.Word(pp.alphanums + "_")("test") + LPAR + pp.SkipTo(RPAR + LPAR + pp.Literal("runs:"))("args") + RPAR +
+    LPAR + pp.Literal("runs:") + pp.common.number("runs") + COMMA +
+    pp.Literal("calls:") + pp.common.number("calls") + COMMA +
+    pp.Literal("reverts:") + pp.common.number("reverts") + RPAR
 )
 
 logs = (
@@ -42,22 +48,23 @@ logs = (
     pp.SkipTo(pp.LineStart() + pp.Literal("Traces:"))("logs")
 )
 
+trace_group = pp.OneOrMore(pp.Group(trace_line + NL)("traces*"))
+
 traces = (
     pp.Literal("Traces") + COLON + NL +
-    pp.OneOrMore(pp.Group(trace_line + NL)("setup_traces*")) +
-    pp.Optional(NL + pp.OneOrMore(pp.Group(trace_line + NL)("traces*")))
+    pp.OneOrMore(pp.Group(trace_group + pp.Optional(NL))("trace_groups*"))
 )
 
 test = (
-    (test_result | fuzz_test_result) + NL +
-    pp.Optional(logs) + pp.Optional(traces + NL)
+    (test_result | fuzz_test_result | invariant_test_result) + NL +
+    pp.Optional(logs) + pp.Optional(traces)
 )
 
 suite_start = (
     pp.Literal("Ran") +
     pp.common.number("count") +
     plur("test") + pp.Literal("for") +
-    pp.Word(pp.alphanums + "./:_")("contract")
+    pp.Word(pp.alphanums + "./:_-")("contract")
 )
 
 suite_end = (
@@ -92,13 +99,13 @@ suites_end_line = (
 failing_test_suite = (
     pp.Literal("Encountered") + pp.common.number("count") +
     pp.Literal("failing") + plur("test") + pp.Literal("in") +
-    pp.Word(pp.alphanums + "./:_")("contract") + NL +
+    pp.Word(pp.alphanums + "./:_-")("contract") + NL +
     pp.OneOrMore(pp.Group(test)("tests*"))
 )
 
 failing_tests_summary = pp.Group(
     pp.Literal("Failing tests:") + NL +
-    pp.OneOrMore(pp.Group(failing_test_suite)("suits*")) + NL +
+    pp.OneOrMore(pp.Group(failing_test_suite + NL)("suits*")) +
     pp.Literal("Encountered a total of") + pp.common.number("failed") +
     pp.Literal("failing") + plur("test") + pp.Literal(",") +
     pp.common.number("success") + plur("test") + pp.Literal("succeeded") + NL

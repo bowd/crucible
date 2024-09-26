@@ -12,4 +12,3 @@ def test_suite_tree(full):
 def test_trace_tree(test):
     out = output.parse_string(test, parse_all=True)
     tree = TraceTree(out)
-    breakpoint()

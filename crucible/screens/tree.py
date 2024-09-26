@@ -9,10 +9,12 @@ class Tree(TreeWidget):
     nodes_by_shadow_node_id: dict
 
     BINDINGS = [
-        ("h", "move_left", "left"),
-        ("j", "move_down", "down"),
-        ("k", "move_up", "up"),
-        ("l", "move_right", "right"),
+        ("l", "move_expand", "expand"),
+        ("h", "move_collpase", "collpase"),
+        ("k", "cursor_up", "up"),
+        ("j", "cursor_down", "down"),
+        ("c", "copy", "copy"),
+        ("i", "inspect", "inspect"),
     ]
 
     def __init__(self, shadow_tree: ShadowTree, **kwargs):
@@ -55,23 +57,45 @@ class Tree(TreeWidget):
         if node_index:
             self.move_to(self.cursor_node.parent.children[node_index - 1])
 
-    def action_move_right(self):
+    def action_move_expand(self):
         assert self.cursor_node is not None
         if self.cursor_node.children:
-            if not self.cursor_node.is_expanded:
+            if self.cursor_node.is_expanded:
+                self.move_to(self.cursor_node.children[0])
+            else:
                 self.cursor_node.expand()
-            self.call_after_refresh(
-                self.move_to,
-                self.cursor_node.children[0])
+                # self.call_after_refresh(
+                #     self.move_to,
+                #     self.cursor_node.children[0])
 
-    def action_move_left(self):
+    def action_move_collpase(self):
         assert self.cursor_node is not None
-        if not self.cursor_node.is_root:
-            self.move_to(self.cursor_node.parent)
+        if self.cursor_node.is_expanded:
+            self.cursor_node.collapse()
+
+    def action_inspect(self):
+        if self.cursor_node:
+            node = self.shadow_tree.get_node(self.cursor_node.data)
+            log(node.test)
+            log(node.suite)
+
+        assert self.cursor_node is not None
+        if self.cursor_node.is_expanded:
+            self.cursor_node.collapse()
 
     def move_to(self, node):
         self.scroll_to_node(node)
         self.move_cursor(node)
+
+    def on_tree_node_expanded(self, evt):
+        node = self.shadow_tree.get_node(evt.node.data)
+        if node:
+            node.toggle_expanded(True)
+
+    def on_tree_node_collapsed(self, evt):
+        node = self.shadow_tree.get_node(evt.node.data)
+        if node:
+            node.toggle_expanded(False)
 
     def on_tree_node_highlighted(self, evt):
         log("Focus: ", evt.node.data)

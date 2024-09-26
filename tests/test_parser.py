@@ -59,3 +59,19 @@ def test14(test14):
 
 def test15(suite_fail1):
     output.parse_string(suite_fail1, parse_all=True)
+
+
+def test_sablier(sablier):
+    output.parse_string(sablier, parse_all=True)
+
+
+def test_sablier2(sablier2):
+    output.parse_string(sablier2, parse_all=True)
+
+
+def test_sablier3(sablier3):
+    output.parse_string(sablier3, parse_all=True)
+
+
+def test_sablier4(sablier4):
+    output.parse_string(sablier4, parse_all=True)

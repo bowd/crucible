@@ -3,7 +3,7 @@ from textual import log
 from rich.text import Text
 
 from crucible.data.shadow_tree import ShadowNode, ShadowTree, NodeID
-from crucible.data.suite_tree import TestNode
+from crucible.data.suite_tree import TestNode, SuiteNode
 from crucible.data.text_styles import default, light, keyword, ret, event, revert
 from crucible.data.call_filters import call_method_eq, call_depth_lt, call_depth_eq
 
@@ -329,12 +329,45 @@ class EventNode(TraceTreeNode):
 
     @property
     def arguments(self):
-        if (self.event.args):
+        if (self.event.children):
             output = Text()
-            for i, arg in enumerate(self.event.args):
-                output.append(ValueNode(arg.value).__short__())
-                if i < len(self.event.args) - 1:
-                    output.append(default(", "))
+            for i, arg in enumerate(self.children):
+                if (isinstance(arg, ValueNode)):
+                    output.append(arg.__short__())
+                    if i < len(self.children) - 1:
+                        output.append(default(", "))
+            return output
+        else:
+            return Text('')
+
+
+class RawEventNode(TraceTreeNode):
+    def __init__(self, event):
+        super().__init__(True)
+        self.event = event
+        if (event.topic0):
+            self.children.append(LabeledArgumentNode(event.topic0, 'topic0'))
+        if (event.topic1):
+            self.children.append(LabeledArgumentNode(event.topic1, 'topic1'))
+        if (event.topic2):
+            self.children.append(LabeledArgumentNode(event.topic2, 'topic2'))
+        if (event.topic3):
+            self.children.append(LabeledArgumentNode(event.topic3, 'topic3'))
+        if (event.data):
+            self.children.append(LabeledArgumentNode(event.data, 'data'))
+
+    def __display__(self):
+        return event("emit UnknownEvent") + "(" + self.arguments + ")"
+
+    @property
+    def arguments(self):
+        if (self.event.children):
+            output = Text()
+            for i, arg in enumerate(self.children):
+                if (isinstance(arg, ValueNode)):
+                    output.append(arg.__short__())
+                    if i < len(self.children) - 1:
+                        output.append(default(", "))
             return output
         else:
             return Text('')
@@ -345,12 +378,23 @@ class TraceTree(ShadowTree):
         super().__init__()
         self.output = output
         suite = output.suites[0]
-        test = output.suites[0].tests[0]
-        self.set_root(TestNode(test.test, test, suite))
+        tests = output.suites[0].tests
+        if (len(tests) > 1):
+            self.set_root(SuiteNode(suite.contract, suite))
+            for test in tests:
+                node = self.root.add_child(
+                    TestNode(test.test, test, suite))
+                self.__add_test__(node, test)
+        else:
+            test = tests[0]
+            self.set_root(TestNode(tests[0].test, tests[0], suite))
+            self.__add_test__(self.root, test)
 
-        current_node = self.root
-        for line in test.setup_traces + test.traces:
-            current_node = self.__add_child__(current_node, line)
+    def __add_test__(self, node, test):
+        current_node = node
+        for trace_group in test.trace_groups:
+            for line in trace_group.traces:
+                current_node = self.__add_child__(current_node, line)
 
     def __add_child__(self, node, line):
         if line.get_name() == "call":
@@ -359,6 +403,9 @@ class TraceTree(ShadowTree):
             return node.add_child(CreateNode(line))
         elif line.get_name() == "event":
             node.add_child(EventNode(line))
+            return node
+        elif line.get_name() == "raw_event":
+            node.add_child(RawEventNode(line))
             return node
         elif line.get_name() == "end":
             if ('return' in line):

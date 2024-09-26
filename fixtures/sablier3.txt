@@ -1,0 +1,25 @@
+No files changed, compilation skipped
+
+Ran 1 test for test/utils/BaseScript.t.sol:BaseScript_Test
+[FAIL: setup failed: vm.deriveKey: the word `YOUR_MNEMONIC` is invalid] setUp() (gas: 0)
+Traces:
+  [86203] BaseScript_Test::setUp()
+    ├─ [52270] → new <unknown>@0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+    │   ├─ [0] VM::envOr("EOA", 0x0000000000000000000000000000000000000000) [staticcall]
+    │   │   └─ ← [Return] <env var value>
+    │   ├─ [0] VM::envOr("MNEMONIC", "test test test test test test test test test test test junk") [staticcall]
+    │   │   └─ ← [Return] <env var value>
+    │   ├─ [0] VM::deriveKey(<pk>) [staticcall]
+    │   │   └─ ← [Revert] vm.deriveKey: the word `YOUR_MNEMONIC` is invalid
+    │   └─ ← [Revert] vm.deriveKey: the word `YOUR_MNEMONIC` is invalid
+    └─ ← [Revert] vm.deriveKey: the word `YOUR_MNEMONIC` is invalid
+
+Suite result: FAILED. 0 passed; 1 failed; 0 skipped; finished in 471.88µs (0.00ns CPU time)
+
+Ran 1 test suite in 762.70ms (471.88µs CPU time): 0 tests passed, 1 failed, 0 skipped (1 total tests)
+
+Failing tests:
+Encountered 1 failing test in test/utils/BaseScript.t.sol:BaseScript_Test
+[FAIL: setup failed: vm.deriveKey: the word `YOUR_MNEMONIC` is invalid] setUp() (gas: 0)
+
+Encountered a total of 1 failing tests, 0 tests succeeded
