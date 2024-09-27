@@ -5,7 +5,7 @@ from screens.suite import SuiteScreen
 class Crucible(App):
     CSS_PATH = "crucible.tcss"
     BINDINGS = [
-        ("d", "toggle_dark", "Toggle dark mode"),
+        ("q", "quit", "Quit"),
     ]
     MODES = {
         "app": SuiteScreen

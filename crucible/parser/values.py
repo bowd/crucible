@@ -4,8 +4,8 @@ ppu = pp.unicode
 LPAR, RPAR, LBRACK, RBRACK, COLON, COMMA = map(pp.Suppress, "()[]:,")
 
 label = pp.Word(
-    ppu.BasicMultilingualPlane.alphas + "_",
-    ppu.BasicMultilingualPlane.alphanums + "_" + "-" + "₮" + "." + " "
+    ppu.BasicMultilingualPlane.alphas + "_-₮.%",
+    ppu.BasicMultilingualPlane.alphanums + "_-₮.% "
 )
 
 

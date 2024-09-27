@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Any, Optional
 
 from textual import work
 from textual.screen import Screen
@@ -13,6 +13,7 @@ from crucible.runner import RunConfig
 from crucible.screens.run_forge_test import RunForgeTest
 
 from .tree import Tree
+from .compilation_results import CompilationResults
 
 
 class TestScreen(Screen):
@@ -21,10 +22,10 @@ class TestScreen(Screen):
         ("r", "run_test", "Rerun test"),
         ("f", "filters", "Filters")
     ]
-    shadow_tree = reactive(None, recompose=True)
-    title = reactive(None)
+    shadow_tree: Optional[ShadowTree] = None
     filters = reactive([], recompose=True)
     logs = None
+    output: Any = reactive(None, recompose=True)
 
     def __init__(self, node, **kwargs):
         super().__init__(classes="test-screen", **kwargs)
@@ -37,6 +38,16 @@ class TestScreen(Screen):
 
     def on_mount(self) -> None:
         self.action_run_test()
+
+    def compose(self):
+        yield Header(show_clock=True)
+        if self.output and self.output.compilation.failed:
+            yield CompilationResults(self.output, id="compilation")
+        elif self.shadow_tree:
+            yield Tree(self.shadow_tree, id="tree")
+            if self.logs and self.logs.strip():
+                yield Static("Logs:\n" + self.logs, id="logs")
+        yield Footer()
 
     async def action_filters(self) -> None:
         if not self.shadow_tree:
@@ -52,14 +63,6 @@ class TestScreen(Screen):
         await self.recompose()
         self.call_after_refresh(self.focus_child, "tree")
 
-    def compose(self):
-        yield Header(show_clock=True)
-        if self.shadow_tree:
-            yield Tree(self.shadow_tree, id="tree")
-            if self.logs and self.logs.strip():
-                yield Static("Logs:\n" + self.logs, id="logs")
-        yield Footer()
-
     def action_back(self) -> None:
         self.app.pop_screen()
 
@@ -69,9 +72,14 @@ class TestScreen(Screen):
         output = await self.app.push_screen_wait(
             RunForgeTest(run_config, title=self.title or "")
         )
-        self.shadow_tree = TraceTree(output)
-        self.logs = output.suites[0].tests[0].logs
-        self.call_after_refresh(self.focus_child, "tree")
+
+        self.output = output
+        if self.output.compilation.failed:
+            self.call_after_refresh(self.focus_child, "compilation")
+        else:
+            self.shadow_tree = TraceTree(output)
+            self.logs = output.suites[0].tests[0].logs
+            self.call_after_refresh(self.focus_child, "tree")
 
     def get_run_config(self) -> RunConfig:
         if isinstance(self.node, TestNode):
