@@ -13,8 +13,8 @@ class Tree(TreeWidget):
         ("h", "move_collpase", "collpase"),
         ("k", "cursor_up", "up"),
         ("j", "cursor_down", "down"),
-        ("c", "copy", "copy"),
-        ("i", "inspect", "inspect"),
+        # ("c", "copy", "copy"),
+        # ("i", "inspect", "inspect"),
     ]
 
     def __init__(self, shadow_tree: ShadowTree, **kwargs):

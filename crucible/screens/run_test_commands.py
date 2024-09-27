@@ -19,12 +19,10 @@ class TestSelected(Message):
 
 class RunTestCommands(Provider):
     def parse_tests(self) -> list:
-        if self.screen.__class__.__name__ == "SuiteScreen":
-            screen: "SuiteScreen" = cast("SuiteScreen", self.screen)
-            if screen.shadow_tree is None:
-                return []
-            return self.parse_test_node(screen.shadow_tree.root)
-        return []
+        screen: "SuiteScreen" = cast("SuiteScreen", self.screen)
+        if screen.shadow_tree is None:
+            return []
+        return self.parse_test_node(screen.shadow_tree.root)
 
     def parse_test_node(self, node):
         if isinstance(node, TestNode):
@@ -46,12 +44,8 @@ class RunTestCommands(Provider):
     async def search(self, query: str) -> Hits:
         """Search for Python files."""
         matcher = self.matcher(query)
-
-        screen = self.screen
-        assert isinstance(screen, SuiteScreen)
-
         hits = process.extract(query, self.choices,
-                               scorer=fuzz.WRatio, limit=10,
+                               scorer=fuzz.token_set_ratio, limit=20,
                                processor=utils.default_process)
 
         for hit in hits:
@@ -59,6 +53,6 @@ class RunTestCommands(Provider):
             yield Hit(
                 score,
                 matcher.highlight(command),
-                partial(screen.post_message, TestSelected(
+                partial(self.screen.post_message, TestSelected(
                     self.test_nodes[index])),
             )

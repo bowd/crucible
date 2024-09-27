@@ -45,7 +45,7 @@ class ForgeRunner():
         if config.match_contract:
             args.append(f"--match-contract {config.match_contract}")
         if config.match_test:
-            args.append(f"--match-test {config.match_test}")
+            args.append(f"--match-test \"^{config.match_test}\\(\\)$\"")
         if config.verbose:
             args.append("-vvvvv")
         command = " ".join(args)
