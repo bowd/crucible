@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "forge-crucible"
-version = "0.1.20"
+version = "0.1.22"
 description = "TUI for running interacting with Foundry's Forge Tests."
 authors = ["bogdan <bogdan@bowd.io>"]
 repository = "https://github.com/bowd/forge-crucible"

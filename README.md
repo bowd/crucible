@@ -1,4 +1,4 @@
-![Crucible Logo](./docs/crucible.webp)
+![Crucible Logo](https://raw.githubusercontent.com/bowd/crucible/refs/heads/main/docs/crucible.webp)
 
 Crucible is a terminal UI application wrapper for [forge test](https://github.com/foundry-rs/foundry) built with [Textual](https://textual.textualize.io/) (💖).
 It provides an interactive environment to navigate your test tree and the trace output of running a test with full verbosity.
@@ -23,16 +23,16 @@ $ crucible
 
 The app should run the full test suite and output a tree representation:
 
-![Example Test Suite view](./docs/suite-view.png)
+![Example Test Suite view](https://raw.githubusercontent.com/bowd/crucible/refs/heads/main/docs/suite-view.png)
 
 You can navigate the tree via the arrows or vim-style (recommended 🤓). 
 You can also press CTRL+P to bring up the command pallet where you can fuzzy-find tests to run:
 
-![Example Search view](./docs/search-view.png)
+![Example Search view](https://raw.githubusercontent.com/bowd/crucible/refs/heads/main/docs/search-view.png)
 
 Once you pick a test you will see the trace view:
 
-![Example Test Trace view](./docs/trace-view.png)
+![Example Test Trace view](https://raw.githubusercontent.com/bowd/crucible/refs/heads/main/docs/trace-view.png)
 
 ## Disclaimer
 
