@@ -67,12 +67,12 @@ class SuitePathNode(SuiteTreeNode):
     def merge_up(self, child):
         merged_node = None
         if isinstance(child, SuitePathNode):
-            merged_node = SuitePathNode(f"{self.__id__}_{child.__id__}")
+            merged_node = SuitePathNode(f"{self.__id__}/{child.__id__}")
             merged_node.tree = self.tree
             merged_node.add_children_from_node(child)
         elif isinstance(child, SuiteNode):
             merged_node = SuiteNode(
-                f"{self.__id__}_{child.__id__}", child.suite)
+                f"{self.__id__}/{child.__id__}", child.suite)
             merged_node.tree = self.tree
             merged_node.add_children_from_node(child)
         return merged_node
@@ -93,10 +93,10 @@ class TestPathNode(SuiteTreeNode):
         merged_node = None
         if isinstance(child, TestPathNode):
             merged_node = TestPathNode(
-                f"{self.__id__}_{child.__id__}", self.suite)
+                f"{self.__id__}/{child.__id__}", self.suite)
         elif isinstance(child, TestNode):
             merged_node = TestNode(
-                f"{self.__id__}_{child.__id__}", child.test, child.suite)
+                f"{self.__id__}/{child.__id__}", child.test, child.suite)
         if merged_node:
             merged_node.tree = self.tree
             merged_node.add_children_from_node(child)
@@ -185,7 +185,6 @@ class SuiteTree(ShadowTree):
 
     def __add_suite__(self, suite):
         path = re.split(r"[:/_]", suite.contract)
-        path = list(filter(lambda x: not x.endswith(".sol"), path))
         suite_label = path.pop()
         current_node = self.root
         for segment in path:
