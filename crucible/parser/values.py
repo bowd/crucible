@@ -68,11 +68,3 @@ struct << label("struct") + pp.Dict(
     pp.Optional(struct_members) +
     pp.Suppress('})'),
 )("members")
-
-
-# struct <<= pp.Group(
-#     label("struct") + pp.nested_expr(
-#         '({', '})',
-#         pp.dict_of(
-#             label("key") + COLON,
-#             pp.Group(value)("value") + pp.Optional(COMMA)))("members"))

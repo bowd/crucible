@@ -5,7 +5,7 @@ from textual.reactive import reactive
 from textual.widgets import LoadingIndicator, Static
 from textual.worker import Worker, WorkerState
 
-from crucible.runner import runner, RunConfig
+from crucible.runner.runner import runner, RunConfig
 
 
 class RunForgeTest(ModalScreen):

@@ -5,7 +5,7 @@ from rich.text import Text
 from crucible.data.shadow_tree import ShadowNode, ShadowTree, NodeID
 from crucible.data.suite_tree import TestNode, SuiteNode
 from crucible.data.text_styles import default, light, keyword, ret, event, revert
-from crucible.data.call_filters import call_method_eq, call_depth_lt, call_depth_eq
+from crucible.data.call_filters import call_method_eq, trace_depth_lt, trace_depth_eq
 
 
 class TraceTreeNode(ShadowNode):
@@ -25,13 +25,13 @@ class TraceTreeNode(ShadowNode):
 class CallNode(TraceTreeNode):
     args: list["LabeledArgumentNode"] = []
 
-    def __init__(self, call):
+    def __init__(self, line):
         super().__init__(
-            call_method_eq(call, "setUp") and
-            call_depth_eq(call, 0) or
-            call_depth_lt(call, 1))
+            call_method_eq(line, "setUp") and
+            trace_depth_eq(line, 0) or
+            trace_depth_lt(line, 1))
 
-        self.call = call
+        self.call = line.call
         self.args = []
         if (self.call.function.args):
             for i, arg in enumerate(self.call.function.args):
@@ -296,9 +296,9 @@ class LabeledArgumentNode(ValueNode):
 
 
 class CreateNode(TraceTreeNode):
-    def __init__(self, create):
+    def __init__(self, line):
         super().__init__(False)
-        self.create = create
+        self.create = line.create
 
     def __display__(self):
         output = Text()
@@ -313,10 +313,10 @@ class CreateNode(TraceTreeNode):
 
 
 class EventNode(TraceTreeNode):
-    def __init__(self, event):
+    def __init__(self, line):
         super().__init__(True)
-        self.event = event
-        for arg in event.args:
+        self.event = line.event
+        for arg in self.event.args:
             self.children.append(LabeledArgumentNode(arg.value, arg.key))
 
     def __display__(self):
@@ -337,19 +337,23 @@ class EventNode(TraceTreeNode):
 
 
 class RawEventNode(TraceTreeNode):
-    def __init__(self, event):
+    def __init__(self, line):
         super().__init__(True)
-        self.event = event
-        if (event.topic0):
-            self.children.append(LabeledArgumentNode(event.topic0, 'topic0'))
-        if (event.topic1):
-            self.children.append(LabeledArgumentNode(event.topic1, 'topic1'))
-        if (event.topic2):
-            self.children.append(LabeledArgumentNode(event.topic2, 'topic2'))
-        if (event.topic3):
-            self.children.append(LabeledArgumentNode(event.topic3, 'topic3'))
-        if (event.data):
-            self.children.append(LabeledArgumentNode(event.data, 'data'))
+        self.event = line.event
+        if (self.event.topic0):
+            self.children.append(LabeledArgumentNode(
+                self.event.topic0, 'topic0'))
+        if (self.event.topic1):
+            self.children.append(LabeledArgumentNode(
+                self.event.topic1, 'topic1'))
+        if (self.event.topic2):
+            self.children.append(LabeledArgumentNode(
+                self.event.topic2, 'topic2'))
+        if (self.event.topic3):
+            self.children.append(LabeledArgumentNode(
+                self.event.topic3, 'topic3'))
+        if (self.event.data):
+            self.children.append(LabeledArgumentNode(self.event.data, 'data'))
 
     def __display__(self):
         return event("emit UnknownEvent") + "(" + self.arguments + ")"
@@ -392,26 +396,26 @@ class TraceTree(ShadowTree):
                 current_node = self.__add_child__(current_node, line)
 
     def __add_child__(self, node, line):
-        if line.get_name() == "call":
+        if line[1].get_name() == "call":
             return node.add_child(CallNode(line))
-        elif line.get_name() == "create":
+        elif line[1].get_name() == "create":
             return node.add_child(CreateNode(line))
-        elif line.get_name() == "event":
+        elif line[1].get_name() == "event":
             node.add_child(EventNode(line))
             return node
-        elif line.get_name() == "raw_event":
+        elif line[1].get_name() == "raw_event":
             node.add_child(RawEventNode(line))
             return node
-        elif line.get_name() == "end":
-            if ('return' in line):
-                node.add_child(ReturnNode(line['return']))
-            elif ('revert' in line):
-                node.add_child(RevertNode(line['revert']))
-            elif ('stop' in line):
+        elif line[1].get_name() == "end":
+            if ('return' in line.end):
+                node.add_child(ReturnNode(line.end['return']))
+            elif ('revert' in line.end):
+                node.add_child(RevertNode(line.end['revert']))
+            elif ('stop' in line.end):
                 node.add_child(StopNode())
             else:
                 log(f"Unknown `end` type: `{line}`")
             return node.parent
         else:
-            log(f"Unknown line type: `{line.get_name()}`")
+            log(f"Unknown line type: `{line[1].get_name()}`")
             return node

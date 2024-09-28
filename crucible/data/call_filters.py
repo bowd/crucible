@@ -1,16 +1,16 @@
-def call_contract_eq(call, contract):
+def call_contract_eq(line, contract):
     return (
-        call.function.target.label == contract or
-        call.function.target.address == contract)
+        line.call.function.target.label == contract or
+        line.call.function.target.address == contract)
 
 
-def call_method_eq(call, method):
-    return call.function.name == method or call.function.selector == method
+def call_method_eq(line, method):
+    return line.call.function.name == method or line.call.function.selector == method
 
 
-def call_depth_eq(call, depth):
-    return call.prefix['depth'] == depth
+def trace_depth_eq(line, depth):
+    return line.prefix['depth'] == depth
 
 
-def call_depth_lt(call, depth):
-    return call.prefix['depth'] < depth
+def trace_depth_lt(line, depth):
+    return line.prefix['depth'] < depth

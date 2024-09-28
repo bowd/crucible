@@ -49,7 +49,6 @@ class ForgeRunner():
         if config.verbose:
             args.append("-vvvvv")
         command = " ".join(args)
-        log(command)
         return command
 
 

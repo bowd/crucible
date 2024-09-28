@@ -19,7 +19,7 @@ def test_label():
     with pytest.raises(ParseException):
         label.parse_string("012312")
     with pytest.raises(ParseException):
-        label.parse_string("%asavx12")
+        label.parse_string("^asavx12")
 
 
 def test_number_zero():

@@ -3,18 +3,6 @@ from .values import address, label, value, number
 
 LPAR, RPAR, LBRACK, RBRACK, COLON, COMMA, NL = map(pp.Suppress, "()[]:,\n")
 
-event_name = pp.Word(pp.alphas.upper(), pp.alphanums + "_")
-event = (
-    pp.CaselessKeyword("emit") +
-    event_name("name") +
-    LPAR +
-    pp.dict_of(
-        label("key") + COLON,
-        pp.Group(value)("value") + pp.Optional(COMMA)
-    )("args") +
-    RPAR
-)
-
 
 def parse_prefix(tokens):
     depth = len(tokens.depth)
@@ -58,18 +46,33 @@ expect_revert = pp.Group(
 )
 
 
-trace_parser = prefix + gas + (
+trace_parser = gas + (
     generic_function("function") |
     expect_revert("function"))
 
-event_parser = pp.Optional(prefix("prefix")) + event
+event_name = pp.Word(pp.alphas.upper(), pp.alphanums + "_")
+event_parser = (
+    pp.CaselessKeyword("emit") +
+    event_name("name") +
+    LPAR +
+    pp.dict_of(
+        label("key") + COLON,
+        pp.Group(value)("value") + pp.Optional(COMMA)
+    )("args") +
+    RPAR
+)
+
 
 raw_event_parser = (
-    prefix("prefix") + pp.Literal("emit topic 0:") + pp.Group(value)("topic0") +
-    pp.Optional(NL + prefix + pp.Literal("topic 1:") + pp.Group(value)("topic1")) +
-    pp.Optional(NL + prefix + pp.Literal("topic 2:") + pp.Group(value)("topic2")) +
-    pp.Optional(NL + prefix + pp.Literal("topic 3:") + pp.Group(value)("topic3")) +
-    pp.Optional(NL + prefix + pp.Literal("data:") + pp.Group(value)("data"))
+    pp.Suppress(pp.Literal("emit topic 0:")) + pp.Group(value)("topic0") +
+    pp.Optional(pp.Suppress(NL + prefix + pp.Literal("topic 1:")) +
+                pp.Group(value)("topic1")) +
+    pp.Optional(pp.Suppress(NL + prefix + pp.Literal("topic 2:")) +
+                pp.Group(value)("topic2")) +
+    pp.Optional(pp.Suppress(NL + prefix + pp.Literal("topic 3:")) +
+                pp.Group(value)("topic3")) +
+    pp.Optional(pp.Suppress(NL + prefix + pp.Literal("data:")) +
+                pp.Group(value)("data"))
 )
 
 
@@ -99,20 +102,18 @@ stop_statement = pp.Group(
 )("stop")
 
 contract_create_parser = (
-    prefix +
     gas +
     pp.Suppress("→ new") +
     pp.SkipTo("@")("contract_name") +
     pp.Suppress("@") +
     address("address"))
 
-call_end_parser = prefix + \
-    (stop_statement | revert_statement | return_statment)
+call_end_parser = (stop_statement | revert_statement | return_statment)
 
-trace_line = (
-    trace_parser("call") |
-    contract_create_parser("create") |
-    event_parser("event") |
-    raw_event_parser("raw_event") |
-    call_end_parser("end")
+trace_line = pp.Optional(prefix) + (
+    pp.Group(trace_parser)("call") |
+    pp.Group(contract_create_parser)("create") |
+    pp.Group(event_parser)("event") |
+    pp.Group(raw_event_parser)("raw_event") |
+    pp.Group(call_end_parser)("end")
 )

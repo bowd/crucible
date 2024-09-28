@@ -1,5 +1,5 @@
 from textual.app import App
-from screens.suite import SuiteScreen
+from crucible.screens.suite import SuiteScreen
 
 
 class Crucible(App):
@@ -19,5 +19,9 @@ class Crucible(App):
         self.dark = not self.dark
 
 
-if __name__ == "__main__":
+def crucible():
     Crucible().run()
+
+
+if __name__ == "__main__":
+    crucible()

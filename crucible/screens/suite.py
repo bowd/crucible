@@ -5,7 +5,7 @@ from textual.widgets import Header, Footer
 from textual.reactive import reactive
 
 from crucible.data.shadow_tree import ShadowTree
-from crucible.runner import RunConfig
+from crucible.runner.runner import RunConfig
 from crucible.data.suite_tree import TestNode, SuiteTree
 
 from .test import TestScreen

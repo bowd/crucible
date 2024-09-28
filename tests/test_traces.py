@@ -20,7 +20,7 @@ def assert_traces_from_fixture(fixture):
 
 def test_raw_event_parser():
     event = """
-    │   │   │   ├─  emit topic 0: 0xe7b046415cac9de47940c3087e06db13a0e058ccf53ac5f0edd49ebb4c2c3a6f
+    emit topic 0: 0xe7b046415cac9de47940c3087e06db13a0e058ccf53ac5f0edd49ebb4c2c3a6f
     │   │   │   │        topic 1: 0x89de88b8eb790de26f4649f543cb6893d93635c728ac857f0926e842fb0d298b
     │   │   │   │        topic 2: 0x0000000000000000000000005615deb798bb3e4dfa0139dfa1b3d433cc23b72f
     │   │   │   │        topic 3: 0x000000000000000000000000765de816845861e75a25fca122bb6898b8b1282a
@@ -56,10 +56,8 @@ def test_each_test14(test14):
 
 def test_event_parser():
     event = event_parser.parse_string(
-        "│   │   │   │   ├─ emit Transfer(from: trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], to: 0x9380fA34Fd9e4Fd14c06305fd7B6199089eD4eb9, value: 1000000000000000000 [1e18])"
+        "emit Transfer(from: trader: [0x10E951fA67B511D044803c7757DA445Ddf646f6d], to: 0x9380fA34Fd9e4Fd14c06305fd7B6199089eD4eb9, value: 1000000000000000000 [1e18])"
     )
-    assert event.prefix['depth'] == 5
-    assert event.prefix['is_last_child'] == False
     assert event.name == "Transfer"
     assert len(event.args) == 3
     assert event.args[0].key == "from"
@@ -73,22 +71,22 @@ def test_event_parser():
 
 def test_call_parser():
     call0 = trace_parser.parse_string(
-        "├─ [8536] 0x000000000000000000000000000000000000ce10::getAddressForStringOrDie(\"Broker\") [staticcall]"
+        "[8536] 0x000000000000000000000000000000000000ce10::getAddressForStringOrDie(\"Broker\") [staticcall]"
     )
     call1 = trace_parser.parse_string(
-        "├─ [8536] Contract::getAddressForStringOrDie(\"Broker\", 234) [staticcall]"
+        "[8536] Contract::getAddressForStringOrDie(\"Broker\", 234) [staticcall]"
     )
     call2 = trace_parser.parse_string(
-        "    ├─ [0] VM::addr(<pk>) [staticcall]"
+        "[0] VM::addr(<pk>) [staticcall]"
     )
     call3 = trace_parser.parse_string(
-        "    ├─ [0] VM::expectRevert(Governor: proposer votes below proposal threshold)"
+        "[0] VM::expectRevert(Governor: proposer votes below proposal threshold)"
     )
 
 
 def test_call_end_parser():
     call_end = call_end_parser.parse_string(
-        "│   └─ ← [Return] NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F]"
+        "← [Return] NewEmissionTarget: [0x2b65ee39398edDb5DAa958faB2FaAbCb957Cc09F]"
     )
 
 

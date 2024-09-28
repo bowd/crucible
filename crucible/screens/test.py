@@ -9,7 +9,7 @@ from crucible.data.trace_tree import TraceTree
 from crucible.data.suite_tree import TestNode, SuiteNode
 from crucible.data.shadow_tree import ShadowTree, FilterKey
 from crucible.data.node_filters import isCall
-from crucible.runner import RunConfig
+from crucible.runner.runner import RunConfig
 from crucible.screens.run_forge_test import RunForgeTest
 
 from .tree import Tree

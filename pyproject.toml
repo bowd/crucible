@@ -1,17 +1,19 @@
 [tool.poetry]
-name = "crucible"
-version = "0.1.0"
+name = "forge-crucible"
+version = "0.1.20"
 description = "TUI for running interacting with Foundry's Forge Tests."
 authors = ["bogdan <bogdan@bowd.io>"]
+repository = "https://github.com/bowd/forge-crucible"
 license = "MIT"
 readme = "README.md"
+packages = [
+    {include = "crucible"}
+]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 textual = "^0.77.0"
 textual-autocomplete = "^3.0.0a9"
-textual-dev = "^1.5.1"
-pytest = "^8.3.2"
 pyparsing = "^3.1.4"
 rapidfuzz = "^3.10.0"
 pyperclip = "^1.9.0"
@@ -19,7 +21,12 @@ pyperclip = "^1.9.0"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.26.0"
+textual-dev = "^1.5.1"
+pytest = "^8.3.2"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+crucible = "crucible.app:crucible"
