@@ -38,6 +38,13 @@ This is very alpha software so it might not work. It employs a grammer to parse 
 I've tried it on a variety of tests but it could still fail when opening a test. If it happens it will create
 a `/tmp/<test-name>.txt` file with the output. Please open an issue and attach the output 󰕹.
 
+## Upcoming features
+
+- **Trace filtering**: Have a list of customizable filters that can be toggled to hide trace lines from the output. The current filtering feature just filters `console.log`, `VM.label` and `VM.addr`.
+- **Trace search**: Jump to trace line by fuzzy searching on the function call or event name.
+- **Profile switch**: Switch the foundry profile that you're using to run the tests, should automatically detect existing profiles.
+- **Custom labling**: Ability to do in-app labeling of addresses or bytes32 identifiers.
+- **External decoding**: Use public resources to decode function calls and events which could come up in fork-tests.
 
 
 
