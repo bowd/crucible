@@ -11,9 +11,11 @@ I recommend using [pipx](https://pipx.pypa.io/stable/installation/), which insta
 $ pipx install forge-curcible
 ```
 
-This will install the `crucible` executable. Then navigate to a foundry project and run:
+This will install the `crucible` executable.
 
 ## Running 
+
+To run it just navigate to the root of a foundry project and run:
 
 ```
 $ crucible
