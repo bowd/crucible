@@ -36,7 +36,7 @@ Once you pick a test you will see the trace view:
 
 This is very alpha software so it might not work. It employs a grammer to parse the forge output.
 I've tried it on a variety of tests but it could still fail when opening a test. If it happens it will create
-a `/tmp/<test-name>.txt` file with the output. Please open an issue and attach the output 󰕹.
+a `/tmp/<test-name>.txt` file with the output. Please open an issue and attach the output.
 
 ## Upcoming features
 
