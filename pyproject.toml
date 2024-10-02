@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "forge-crucible"
-version = "0.1.22"
+version = "0.1.23"
 description = "TUI for running interacting with Foundry's Forge Tests."
 authors = ["bogdan <bogdan@bowd.io>"]
 repository = "https://github.com/bowd/forge-crucible"
@@ -11,7 +11,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 textual = "^0.77.0"
 textual-autocomplete = "^3.0.0a9"
 pyparsing = "^3.1.4"
