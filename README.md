@@ -8,7 +8,7 @@ It provides an interactive environment to navigate your test tree and the trace 
 I recommend using [pipx](https://pipx.pypa.io/stable/installation/), which installes applications distributed via pypi into their own virtual environment.
 
 ```bash
-$ pipx install forge-curcible
+$ pipx install forge-crucible
 ```
 
 This will install the `crucible` executable.
